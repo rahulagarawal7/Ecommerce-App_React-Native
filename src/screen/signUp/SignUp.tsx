@@ -8,6 +8,7 @@ import {RootStackParamList} from '../../navigation/types';
 import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
 import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
+import PasswordInputBox from '../../component/passwordInputBox/passwordInputBox';
 
 interface SignUpProps {
   navigation: NavigationProp<RootStackParamList>;
@@ -19,66 +20,67 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const handleSignUp = () => {
+
+  const handleSignUp = async () => {
     if (!email || !password || !name || !phone) {
       Alert.alert('Error', 'Please fill all fields!');
       return;
     }
 
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        console.log('User account created & signed in!');
-        Alert.alert('Success', 'Account created successfully & signed in!');
+    try {
+      await auth().createUserWithEmailAndPassword(email, password);
+      const currentUser = auth().currentUser;
 
-        // Add user name and phone to Firebase Authentication
-        const user = userCredential.user;
-        user
-          .updateProfile({
-            displayName: name,
-            photoURL: phone.toString(),
-          })
-          .then(() => {
-            console.log('User profile updated!');
-            dispatch(addUserInfo(user));
-          })
-          .catch(error => console.error('Error updating profile:', error));
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          Alert.alert('Error', 'That email address is already in use!');
-        } else if (error.code === 'auth/invalid-email') {
-          Alert.alert('Error', 'That email address is invalid!');
-        } else {
-          Alert.alert('Error', 'Something went wrong!');
-        }
-        console.error(error);
-      });
+      if (currentUser) {
+        await currentUser.updateProfile({
+          displayName: name,
+          photoURL: phone.toString(),
+        });
+
+        await currentUser.reload();
+
+        dispatch(addUserInfo(auth().currentUser));
+
+        Alert.alert('Success', 'User registered successfully!');
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Error during sign up:', error);
+        Alert.alert('Error', error.message);
+      } else {
+        console.error('Error during sign up:', error);
+        Alert.alert('Error', 'An error occurred during sign up');
+      }
+    }
   };
+
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>Sign Up</Text>
       <View style={styles.inputBox}>
         <InputBox
+          keyboardType="text"
           placeholder="name"
           containerStyle={styles.input}
           onChangeText={setName}
         />
         <InputBox
+          keyboardType="number"
           placeholder="phone"
           containerStyle={styles.input}
           onChangeText={setPhone}
         />
         <InputBox
+          keyboardType="text"
           placeholder="email"
           containerStyle={styles.input}
           onChangeText={setEmail}
         />
-        <InputBox
+        <PasswordInputBox
+          keyboardType="text"
           placeholder="password"
           containerStyle={styles.input}
           onChangeText={setPassword}
-          secureTextEntry={true}
         />
         <Button buttonName="Sign Up" handleSubmit={handleSignUp} />
       </View>

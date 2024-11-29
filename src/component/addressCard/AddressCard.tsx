@@ -1,18 +1,39 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {colors, ms} from '../../utils';
+import {AddressType} from '../../utils/types';
+import {screenNames} from '../../utils/constants';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../navigation/types';
 
 interface AddressCardProps {
-  address: string;
+  address: AddressType;
 }
 
 const AddressCard: React.FC<AddressCardProps> = ({address}) => {
-  const shortAddress = address?.split(' ').splice(0, 4).join(' ');
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const {city = '', streetAddress = '', userState = '', zipCode = ''} = address;
+  const [shortAdd, setShortAdd] = useState<string>('');
+
+  const shortAddress = () => {
+    const data = city + ' ' + streetAddress + ' ' + userState + ' ' + zipCode;
+    const shortAddress = data?.split(' ').splice(0, 4).join(' ');
+    setShortAdd(shortAddress);
+  };
+
+  useEffect(() => {
+    shortAddress();
+  });
+
   return (
-    <TouchableOpacity style={styles.container}>
-      <Text style={styles.text}>{shortAddress}...</Text>
-      <Text style={styles.editText}>Edit</Text>
-    </TouchableOpacity>
+    <View style={styles.container}>
+      <Text style={styles.text}>{shortAdd}...</Text>
+      <Text
+        style={styles.editText}
+        onPress={() => navigation.navigate(screenNames.addAddress, undefined)}>
+        Edit
+      </Text>
+    </View>
   );
 };
 

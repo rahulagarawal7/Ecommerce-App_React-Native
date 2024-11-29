@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -10,37 +11,39 @@ import React from 'react';
 import {UserLogo} from '../../assets';
 import {AddButtonCard, NameAddressCard} from '../../component';
 import {colors, ms} from '../../utils';
-import {screenNames} from '../../utils/constants';
-import auth from '@react-native-firebase/auth';
+import {profileButtonNames} from '../../utils/constants';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {useSelector} from 'react-redux';
+import {t} from 'i18next';
 
-const userInfo = {
-  name: 'rahul Agrawal',
-  phone: 7067076526,
-  email: 'rahul@gmail.com',
-};
-
-const handleSignOut = () => {
-  auth()
-    .signOut()
-    .then(() => console.log('User signed out!'));
-};
-
-const profileButtonNames: profileButtonNames[] = [
-  {id: 1, name: 'address', screenName: screenNames.address},
-  {id: 2, name: 'wishlist', screenName: screenNames.wishlist},
-  {id: 3, name: 'payment', screenName: screenNames.payment},
-  {id: 4, name: 'help', screenName: screenNames.help},
-  {id: 5, name: 'support', screenName: screenNames.support},
-  {id: 6, name: 'language', screenName: screenNames.language},
-];
-
-interface profileButtonNames {
-  id: number;
-  name: string;
-  screenName: string;
+interface RootState {
+  user: {
+    userInfo: FirebaseAuthTypes.User;
+  };
 }
 
 const Profile = () => {
+  const userInfo = useSelector((store: RootState) => store?.user?.userInfo);
+
+  const handleSignOut = () => {
+    Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => {
+          console.log('OK Pressed');
+          auth()
+            .signOut()
+            .then(() => console.log('User signed out!'));
+        },
+      },
+    ]);
+  };
+
   return (
     <ScrollView
       style={styles.container}
@@ -57,9 +60,10 @@ const Profile = () => {
             screenName={btn.screenName}
           />
         ))}
-        <TouchableOpacity onPress={() => handleSignOut()}>
-          <Text>SignOut</Text>
-        </TouchableOpacity>
+
+        <Text style={styles.text} onPress={() => handleSignOut()}>
+          {t('signOut')}
+        </Text>
       </View>
     </ScrollView>
   );
@@ -89,5 +93,12 @@ const styles = StyleSheet.create({
   },
   scrollViewContainer: {
     gap: 25,
+  },
+  text: {
+    width: ms(60),
+    fontSize: ms(15),
+    marginBottom: 10,
+    color: colors.tintColor,
+    marginLeft: 5,
   },
 });

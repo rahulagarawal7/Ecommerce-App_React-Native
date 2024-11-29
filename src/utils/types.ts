@@ -50,4 +50,24 @@ export interface ProductTypes{
         error?:string
     }
 
- 
+   export interface profileButtonNames {
+        id: number;
+        name: string;
+        screenName: string;
+      }
+      
+      export interface AddressType {
+        city: string;
+        streetAddress: string;
+        userState: string;
+        zipCode: string;
+      }
+
+      export interface PaymentType{
+        cardNumber:number,
+        exp:number,
+        ccv:number,
+        cardholderName:string,
+        
+
+      }

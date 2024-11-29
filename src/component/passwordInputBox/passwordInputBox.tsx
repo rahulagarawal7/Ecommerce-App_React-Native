@@ -1,29 +1,33 @@
-import {StyleSheet, TextInput, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {colors, ms} from '../../utils';
 import {t} from 'i18next';
+import {
+  Image,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {EyeLogo, HiddenLogo} from '../../assets';
 
 interface InputBoxProps {
   placeholder: string;
   containerStyle?: object;
   onChangeText?: (text: string) => void;
-  secureTextEntry?: boolean;
   value?: string | null;
   editable?: boolean;
   keyboardType: string;
-  onChange?: (text: string) => void;
 }
 
-const InputBox: React.FC<InputBoxProps> = ({
+const PasswordInputBox: React.FC<InputBoxProps> = ({
   placeholder,
   containerStyle,
   onChangeText,
   value,
   editable,
   keyboardType,
-  onChange,
-  secureTextEntry = false,
 }) => {
+  const [show, setShow] = useState<boolean>(true);
   return (
     <View style={[styles.container, containerStyle]}>
       <TextInput
@@ -32,16 +36,18 @@ const InputBox: React.FC<InputBoxProps> = ({
         style={styles.text}
         onChangeText={onChangeText}
         value={value}
-        onChange={onChange}
         editable={editable}
         keyboardType={keyboardType}
-        secureTextEntry={secureTextEntry}
+        secureTextEntry={show}
       />
+      <TouchableOpacity onPress={() => setShow(!show)}>
+        <Image source={show ? HiddenLogo : EyeLogo} style={styles.image} />
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default InputBox;
+export default PasswordInputBox;
 
 const styles = StyleSheet.create({
   container: {
@@ -52,10 +58,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 10,
     alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
     color: colors.textColor,
+    width: ms(300),
+    height: ms(35),
     fontSize: ms(16),
     fontWeight: '400',
+  },
+  image: {
+    height: ms(20),
+    width: ms(20),
+    marginRight: ms(5),
   },
 });

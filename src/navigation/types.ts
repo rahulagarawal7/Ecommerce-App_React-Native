@@ -1,3 +1,4 @@
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { ProductTypes } from "../utils/types";
 
 export type RootStackParamList = {
@@ -19,5 +20,5 @@ export type RootStackParamList = {
   categoriesWiseList: { name: string  };
   search: undefined;
   finalPayment:{price:number};
-  [key: string]: undefined | { name: string } | { data: ProductTypes[] } | { data: ProductTypes } | {price :number};
+  [key: string]: undefined | { name: string } | { data: ProductTypes[] } | { data: ProductTypes } | {price :number} ;
 };

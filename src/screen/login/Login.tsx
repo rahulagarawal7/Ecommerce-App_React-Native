@@ -6,9 +6,10 @@ import {AppleLogo, FacebookLogo, GoogleLogo} from '../../assets';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {t} from 'i18next';
 import {RootStackParamList} from '../../navigation/types';
-import {screenNames} from '../../utils/constants';
+import {screenNames, showShankBar} from '../../utils/constants';
 
 import auth from '@react-native-firebase/auth';
+import PasswordInputBox from '../../component/passwordInputBox/passwordInputBox';
 
 const Login = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -23,18 +24,17 @@ const Login = () => {
 
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(successful => {
         console.log('User signed in successfully!');
         Alert.alert('Success', 'You are logged in!');
-        navigation.navigate(screenNames.bottomTab); // Navigate after successful login
+        console.log('successful---->', successful.user.displayName);
       })
       .catch(error => {
-        if (error.code === 'auth/user-not-found') {
-          Alert.alert('Error', 'No user found with this email!');
-        } else {
+        if (error.code === 'auth/invalid-credential') {
           Alert.alert('Error', 'wrong Password or Email!');
+        } else {
+          Alert.alert('Network Error', 'Try after some time!');
         }
-        console.error(error);
       });
   };
 
@@ -42,11 +42,15 @@ const Login = () => {
     <ScrollView style={styles.container}>
       <Text style={styles.heading}>Sign In</Text>
       <View style={styles.inputBox}>
-        <InputBox placeholder="email" onChangeText={setEmail} />
         <InputBox
+          placeholder="email"
+          onChangeText={setEmail}
+          keyboardType="text"
+        />
+        <PasswordInputBox
+          keyboardType="text"
           placeholder="password"
           onChangeText={setPassword}
-          secureTextEntry={true}
         />
         <Button buttonName="sign in" handleSubmit={handleLogin} />
       </View>

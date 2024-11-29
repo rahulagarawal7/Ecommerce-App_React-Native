@@ -1,3 +1,4 @@
+import Snackbar from 'react-native-snackbar';
 import {
   CategoriesImage1,
   CategoriesImage2,
@@ -13,6 +14,7 @@ export const colors: {[key: string]: string} = {
   cardBgColor: '#f3f3f3',
   primaryBgColor: '#ffffff',
   radioButtonBgColor: '#ada8a8',
+  error: 'red',
 };
 
 export const languages = [
@@ -78,4 +80,21 @@ export const screenNames = {
 
 export const API_ROUTES = {
   getAllProducts: '/products',
+};
+
+export const profileButtonNames = [
+  {id: 1, name: 'address', screenName: screenNames.address},
+  {id: 2, name: 'wishlist', screenName: screenNames.wishlist},
+  {id: 3, name: 'payment', screenName: screenNames.payment},
+  {id: 4, name: 'help', screenName: screenNames.help},
+  {id: 5, name: 'support', screenName: screenNames.support},
+  {id: 6, name: 'language', screenName: screenNames.language},
+];
+
+export const showShankBar = (title: string, error?: string) => {
+  Snackbar.show({
+    text: title,
+    textColor: error && 'red',
+    duration: Snackbar.LENGTH_SHORT,
+  });
 };

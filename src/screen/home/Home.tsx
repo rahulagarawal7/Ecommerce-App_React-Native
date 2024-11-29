@@ -19,6 +19,10 @@ import {RootStackParamList} from '../../navigation/types';
 import {screenNames} from '../../utils/constants';
 import {useAppSelector} from '../../redux/store/store';
 import {ProductTypes} from '../../utils/types';
+import {firebase} from '@react-native-firebase/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
+
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 type Props = {
@@ -28,11 +32,18 @@ type Props = {
 const Home: React.FC<Props> = ({navigation}) => {
   const [products, setProducts] = useState<ProductTypes[]>([]);
   const data = useAppSelector(store => store?.products?.products);
-  const user = useAppSelector(store => store?.user.userInfo);
-  console.log('user----->', user);
+  const dispatch = useDispatch();
+  const userInfo = useSelector(store => store?.user?.userInfo);
+
   useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        dispatch(addUserInfo(user));
+      }
+    });
+
     setProducts(data);
-  }, [data]);
+  }, [data, userInfo]);
 
   return (
     <ScrollView style={styles.container}>
