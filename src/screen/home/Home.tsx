@@ -22,6 +22,8 @@ import {ProductTypes} from '../../utils/types';
 import {firebase} from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
+import {styles} from './styles';
+import messaging from '@react-native-firebase/messaging';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -35,6 +37,11 @@ const Home: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch();
   const userInfo = useSelector(store => store?.user?.userInfo);
 
+  const getToken = async () => {
+    await messaging().registerDeviceForRemoteMessages();
+    const token = await messaging().getToken();
+    console.log('token -->', token);
+  };
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -44,6 +51,10 @@ const Home: React.FC<Props> = ({navigation}) => {
 
     setProducts(data);
   }, [data, userInfo]);
+
+  useEffect(() => {
+    getToken();
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -87,20 +98,3 @@ const Home: React.FC<Props> = ({navigation}) => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: 'white',
-  },
-  containerBox: {
-    gap: 20,
-  },
-  box: {
-    gap: 10,
-  },
-  hederBox: {
-    gap: 30,
-  },
-});

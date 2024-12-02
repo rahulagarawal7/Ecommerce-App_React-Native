@@ -7,6 +7,7 @@ import {BackButton} from '../../component';
 import RNRestart from 'react-native-restart';
 import {useDispatch} from 'react-redux';
 import {changeLang} from '../../redux/slices/LanguageSlice';
+import {styles} from './styles';
 
 interface LanguageType {
   name: string;
@@ -77,31 +78,3 @@ const Language: React.FC = () => {
 };
 
 export default Language;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.primaryBgColor,
-  },
-  text: {
-    fontSize: ms(18),
-    fontWeight: '500',
-    marginLeft: ms(10),
-  },
-  box: {
-    width: ms(342),
-    alignSelf: 'center',
-    marginTop: ms(20),
-    gap: ms(10),
-  },
-  innerBox: {
-    backgroundColor: colors.secondaryBgColor,
-    paddingVertical: ms(15),
-    justifyContent: 'center',
-    borderRadius: 15,
-  },
-  selectedBox: {
-    borderColor: colors.selectedBorderColor,
-    borderWidth: 2,
-  },
-});

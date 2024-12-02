@@ -5,6 +5,7 @@ import {colors, ms} from '../../utils';
 import {categoriesList, screenNames} from '../../utils/constants';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './styles';
 
 interface SeeAllCategoriesProps {
   navigation: NavigationProp<RootStackParamList>;
@@ -35,14 +36,3 @@ const SeeAllCategories: React.FC<SeeAllCategoriesProps> = ({navigation}) => {
 };
 
 export default SeeAllCategories;
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: colors.primaryBgColor,
-  },
-  box: {
-    marginTop: ms(20),
-  },
-});

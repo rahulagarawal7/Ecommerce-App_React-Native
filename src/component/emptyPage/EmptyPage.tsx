@@ -13,6 +13,7 @@ import {Button} from '../../component';
 import {t} from 'i18next';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './styles';
 interface EmptyPageProps {
   title: string;
   image: ImageSourcePropType;
@@ -48,23 +49,3 @@ const EmptyPage: React.FC<EmptyPageProps> = ({
 };
 
 export default EmptyPage;
-
-const styles = StyleSheet.create({
-  container: {
-    height: ms(236),
-    width: ms(342),
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: 15,
-  },
-  image: {
-    height: ms(100),
-    width: ms(100),
-  },
-  text: {
-    color: colors.textColor,
-    fontSize: 30,
-    fontWeight: '500',
-  },
-});

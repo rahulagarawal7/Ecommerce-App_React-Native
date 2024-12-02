@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import React from 'react';
-import {colors, ms} from '../../utils';
+import {styles} from './styles';
 
 interface CenterHeadingProps {
   headingName: string;
@@ -17,12 +17,3 @@ const CenterHeading: React.FC<CenterHeadingProps> = ({headingName}) => {
 };
 
 export default CenterHeading;
-
-const styles = StyleSheet.create({
-  text: {
-    color: colors.textColor,
-    alignSelf: 'center',
-    fontSize: ms(18),
-    fontWeight: '500',
-  },
-});

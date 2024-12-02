@@ -14,6 +14,7 @@ import {screenNames} from '../../utils/constants';
 import {RootStackParamList} from '../../navigation/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AddressType} from '../../utils/types';
+import {styles} from './styles';
 
 const Address = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -104,26 +105,3 @@ const Address = () => {
 };
 
 export default Address;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.primaryBgColor,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    paddingBottom: 80,
-  },
-  btn: {
-    position: 'absolute',
-    bottom: 20,
-    left: 20,
-    right: 20,
-  },
-  empty: {
-    marginTop: '30%',
-  },
-  addressCard: {
-    marginTop: ms(20),
-  },
-});

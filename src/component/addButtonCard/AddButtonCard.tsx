@@ -1,10 +1,10 @@
-import {Image, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Image, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {colors, ms} from '../../utils';
 import {BackArrowLogo} from '../../assets';
 import {useTranslation} from 'react-i18next';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './style';
 
 interface AddButtonCardProps {
   title: string;
@@ -29,26 +29,3 @@ const AddButtonCard: React.FC<AddButtonCardProps> = ({title, screenName}) => {
 };
 
 export default AddButtonCard;
-
-const styles = StyleSheet.create({
-  container: {
-    height: ms(56),
-    width: ms(342),
-    backgroundColor: colors.secondaryBgColor,
-    alignSelf: 'center',
-    borderRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 15,
-  },
-  image: {
-    height: ms(24),
-    width: ms(24),
-    transform: [{rotate: '180deg'}],
-  },
-  text: {
-    color: colors.textColor,
-    fontSize: ms(18),
-  },
-});

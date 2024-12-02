@@ -12,6 +12,7 @@ import {categoriesList, screenNames} from '../../utils/constants';
 import {t} from 'i18next';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './styles';
 
 interface SearchProps {
   navigation: NavigationProp<RootStackParamList>;
@@ -46,20 +47,3 @@ const Search: React.FC<SearchProps> = ({navigation}) => {
 };
 
 export default Search;
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: colors.primaryBgColor,
-    gap: 15,
-  },
-  box: {
-    marginTop: ms(20),
-  },
-  headingText: {
-    fontSize: ms(18),
-    fontWeight: '500',
-    padding: ms(15),
-  },
-});

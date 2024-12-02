@@ -1,17 +1,30 @@
-import {Alert, Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BackButton, Button} from '../../component';
 import {colors, ms} from '../../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {RootStackParamList} from '../../navigation/types';
-import {RouteProp} from '@react-navigation/native';
+import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {ProductTypes} from '../../utils/types';
+import {screenNames, showShankBar} from '../../utils/constants';
+import {CartLogo} from '../../assets';
+import Snackbar from 'react-native-snackbar';
+import {styles} from './styles';
 
 interface ProductDetailsProps {
   route: RouteProp<RootStackParamList, 'productDetails'>;
+  navigation: NavigationProp<RootStackParamList, 'Cart'>;
 }
 
-const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
+const ProductDetails: React.FC<ProductDetailsProps> = ({route, navigation}) => {
   const {image, brand, description, title, price} = route?.params?.data;
   const [onCart, setOnCart] = useState(false);
   const [cartProducts, setCartProducts] = useState([]);
@@ -32,8 +45,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
         'cartProducts',
         JSON.stringify(parsedCartProducts),
       );
+      showShankBar('product added to cart');
     } catch (error) {
       console.error('Failed to save Cart product:', error);
+      showShankBar('Failed to save Cart product', 'error');
     }
   };
 
@@ -51,8 +66,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
         'cartProducts',
         JSON.stringify(updatedCartProducts),
       );
+      showShankBar('product remove from Cart');
     } catch (error) {
       console.error('Failed to remove Cart product:', error);
+      showShankBar('Failed to remove Cart product', 'error');
     }
   };
 
@@ -110,6 +127,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
     <View style={styles.container}>
       <BackButton heading="back" />
       <ScrollView style={styles.box} showsVerticalScrollIndicator={false}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate(screenNames.cart, undefined);
+          }}>
+          <Image style={styles.cartLogo} source={CartLogo} />
+        </TouchableOpacity>
         <Image source={{uri: image}} style={styles.imageStyle} />
         <Text style={styles.text}>{brand}</Text>
         <Text style={styles.text}>Price - ${price}</Text>
@@ -126,52 +149,3 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route}) => {
 };
 
 export default ProductDetails;
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: colors.primaryBgColor,
-  },
-  box: {
-    width: ms(342),
-    backgroundColor: colors.cardBgColor,
-    height: '100%',
-    alignSelf: 'center',
-    borderRadius: 10,
-    marginVertical: ms(20),
-  },
-  lkeImage: {
-    height: ms(25),
-    width: ms(24),
-  },
-  likeContainer: {
-    position: 'absolute',
-    alignSelf: 'flex-end',
-    padding: 15,
-  },
-  imageStyle: {
-    height: ms(300),
-    width: ms(300),
-    alignSelf: 'center',
-    marginTop: ms(50),
-    borderRadius: 10,
-  },
-  text: {
-    fontSize: ms(20),
-    padding: 10,
-    fontWeight: '700',
-    color: colors.textColor,
-  },
-  descText: {
-    textAlign: 'justify',
-    padding: 10,
-    color: colors.textColor,
-  },
-  textTitle: {
-    color: colors.textColor,
-    padding: 10,
-    textAlign: 'justify',
-    fontSize: ms(18),
-  },
-});

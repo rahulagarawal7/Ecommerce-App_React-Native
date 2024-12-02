@@ -5,6 +5,7 @@ import {AddressType} from '../../utils/types';
 import {screenNames} from '../../utils/constants';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './styles';
 
 interface AddressCardProps {
   address: AddressType;
@@ -38,25 +39,3 @@ const AddressCard: React.FC<AddressCardProps> = ({address}) => {
 };
 
 export default AddressCard;
-
-const styles = StyleSheet.create({
-  container: {
-    height: ms(72),
-    width: ms(342),
-    backgroundColor: colors.secondaryBgColor,
-    borderRadius: 10,
-    justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  text: {
-    color: colors.textColor,
-    fontSize: ms(16),
-  },
-  editText: {
-    fontSize: ms(20),
-    color: colors.tintColor,
-  },
-});

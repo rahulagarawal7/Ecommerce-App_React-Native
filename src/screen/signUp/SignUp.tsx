@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 import {useDispatch} from 'react-redux';
 import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
 import PasswordInputBox from '../../component/passwordInputBox/passwordInputBox';
+import {styles} from './styles';
 
 interface SignUpProps {
   navigation: NavigationProp<RootStackParamList>;
@@ -97,32 +98,3 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
 };
 
 export default SignUp;
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: colors.primaryBgColor,
-  },
-  heading: {
-    color: colors.textColor,
-    fontSize: ms(33),
-    padding: ms(20),
-    marginVertical: '10%',
-  },
-  inputBox: {
-    gap: 10,
-  },
-  input: {
-    marginBottom: 10,
-  },
-  createText: {
-    width: ms(342),
-    alignSelf: 'center',
-    marginTop: 10,
-    color: colors.textColor,
-  },
-  textOne: {
-    color: colors.tintColor,
-  },
-});

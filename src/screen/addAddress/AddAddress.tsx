@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {screenNames, showShankBar} from '../../utils/constants';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './styles';
 
 interface AddAddressProps {
   navigation: NavigationProp<RootStackParamList, 'Profile'>;
@@ -123,32 +124,3 @@ const AddAddress: React.FC<AddAddressProps> = ({navigation}) => {
 };
 
 export default AddAddress;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.primaryBgColor,
-    gap: 15,
-  },
-  box: {
-    alignSelf: 'center',
-    flexDirection: 'row',
-    height: ms(56),
-    width: ms(342),
-    justifyContent: 'space-around',
-  },
-  smallInputBox: {
-    width: ms(160),
-  },
-  loaderOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loaderText: {
-    marginTop: 20,
-    color: colors.textColor,
-    fontSize: ms(18),
-  },
-});

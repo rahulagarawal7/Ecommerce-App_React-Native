@@ -10,6 +10,7 @@ import {screenNames, showShankBar} from '../../utils/constants';
 
 import auth from '@react-native-firebase/auth';
 import PasswordInputBox from '../../component/passwordInputBox/passwordInputBox';
+import {styles} from './styles';
 
 const Login = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -72,38 +73,3 @@ const Login = () => {
 };
 
 export default Login;
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: colors.primaryBgColor,
-  },
-  heading: {
-    color: colors.textColor,
-    fontSize: ms(33),
-    padding: ms(20),
-    marginVertical: '10%',
-  },
-  inputBox: {
-    gap: 20,
-  },
-  createText: {
-    width: ms(342),
-    alignSelf: 'center',
-    marginTop: 10,
-    color: colors.textColor,
-  },
-  textOne: {
-    color: colors.tintColor,
-  },
-  logo: {
-    width: ms(342),
-    height: ms(49),
-    alignSelf: 'center',
-  },
-  imgBox: {
-    marginVertical: '10%',
-    gap: 10,
-  },
-});

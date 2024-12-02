@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getProductsList} from '../../redux/slices/category/categorySlice';
 import {AppDispatch, RootState} from '../../redux/store/store';
 import {setLoading} from '../../redux/slices/loading/loadingSlice';
+import {styles} from './styles';
 
 interface CategoryWiseListProps {
   route: RouteProp<RootStackParamList, 'categoryWiseList'>;
@@ -71,28 +72,3 @@ const CategoriesWiseList: React.FC<CategoryWiseListProps> = ({route}) => {
 };
 
 export default CategoriesWiseList;
-
-const styles = StyleSheet.create({
-  headingText: {
-    color: colors.textColor,
-    fontWeight: '600',
-    fontSize: ms(20),
-    padding: 15,
-  },
-  container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: colors.primaryBgColor,
-  },
-  loaderOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loaderText: {
-    marginTop: 20,
-    color: colors.textColor,
-    fontSize: ms(18),
-  },
-});

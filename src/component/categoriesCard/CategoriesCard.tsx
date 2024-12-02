@@ -5,6 +5,7 @@ import {categoriesList, screenNames} from '../../utils/constants';
 import {useTranslation} from 'react-i18next';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './styles';
 
 const CategoriesCard: React.FC = () => {
   const {t} = useTranslation();
@@ -35,36 +36,3 @@ const CategoriesCard: React.FC = () => {
 };
 
 export default CategoriesCard;
-
-const styles = StyleSheet.create({
-  container: {
-    height: ms(100),
-    width: ms(342),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    gap: 10,
-    backgroundColor: colors.primaryBgColor,
-  },
-  imageBox: {
-    height: ms(56),
-    width: ms(56),
-    borderRadius: 56,
-    backgroundColor: colors.cardBgColor,
-  },
-  image: {
-    height: ms(56),
-    width: ms(56),
-    borderRadius: 56,
-    alignSelf: 'center',
-    objectFit: 'cover',
-  },
-  box: {
-    gap: 5,
-  },
-  categoriesNameText: {
-    textAlign: 'center',
-    color: colors.textColor,
-  },
-});

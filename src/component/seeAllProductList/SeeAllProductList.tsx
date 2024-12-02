@@ -4,6 +4,7 @@ import ProductCard from '../productCard/ProductCard';
 import {InitialProductsStateTypes, ProductTypes} from '../../utils/types';
 import {useAppDispatch, useAppSelector} from '../../redux/store/store';
 import {getAllProductsActions} from '../../redux/slices/products/products.actions';
+import {styles} from './styles';
 
 interface SeeAllProductListProps {
   productList: ProductTypes[];
@@ -40,9 +41,3 @@ const SeeAllProductList: React.FC<SeeAllProductListProps> = ({
 };
 
 export default SeeAllProductList;
-
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 90,
-  },
-});

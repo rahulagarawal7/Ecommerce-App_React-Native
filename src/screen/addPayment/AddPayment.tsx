@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {screenNames, showShankBar} from '../../utils/constants';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './styles';
 
 interface AddPaymentProps {
   navigation: NavigationProp<RootStackParamList, 'Profile'>;
@@ -206,25 +207,3 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
 };
 
 export default AddPayment;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.primaryBgColor,
-    gap: 15,
-    paddingHorizontal: ms(20),
-    paddingVertical: ms(20),
-  },
-  box: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  smallInputBox: {
-    width: ms(160),
-  },
-  error: {
-    color: colors.error,
-    fontSize: ms(12),
-    marginTop: ms(4),
-  },
-});

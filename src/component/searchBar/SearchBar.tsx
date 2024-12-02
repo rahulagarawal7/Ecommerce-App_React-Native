@@ -3,6 +3,7 @@ import React from 'react';
 import {SearchIcon} from '../../assets';
 import {colors, ms} from '../../utils';
 import {t} from 'i18next';
+import {styles} from './styles';
 
 interface SearchBarProps {
   placeholder: string;
@@ -24,27 +25,3 @@ const SearchBar: React.FC<SearchBarProps> = ({placeholder}) => {
 };
 
 export default SearchBar;
-
-const styles = StyleSheet.create({
-  container: {
-    height: ms(40),
-    width: ms(342),
-    backgroundColor: colors.secondaryBgColor,
-    alignSelf: 'center',
-    borderRadius: 20,
-    justifyContent: 'center',
-  },
-  box: {
-    flexDirection: 'row',
-    marginHorizontal: ms(10),
-  },
-  searchImage: {
-    height: ms(16),
-    width: ms(16),
-    alignSelf: 'center',
-  },
-  searchText: {
-    marginHorizontal: 10,
-    color: colors.textColor,
-  },
-});

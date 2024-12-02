@@ -3,6 +3,7 @@ import React from 'react';
 import {BackButton} from '../../component';
 import {colors, ms} from '../../utils';
 import {t} from 'i18next';
+import {styles} from './styles';
 
 const Help = () => {
   return (
@@ -18,21 +19,3 @@ const Help = () => {
 };
 
 export default Help;
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: colors.primaryBgColor,
-  },
-  textBox: {
-    width: ms(342),
-    alignSelf: 'center',
-    marginVertical: 10,
-  },
-  text: {
-    fontSize: ms(16),
-    color: colors.textColor,
-    marginVertical: 10,
-  },
-});

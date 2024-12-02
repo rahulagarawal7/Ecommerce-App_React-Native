@@ -4,6 +4,7 @@ import {colors, ms} from '../../utils';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {t} from 'i18next';
 import {RootStackParamList} from '../../navigation/types';
+import {styles} from './styles';
 
 interface CategoriesHeadingProps {
   primaryText: string;
@@ -31,22 +32,3 @@ const CategoriesHeading: React.FC<CategoriesHeadingProps> = ({
 };
 
 export default CategoriesHeading;
-
-const styles = StyleSheet.create({
-  container: {
-    width: ms(341),
-    alignSelf: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  seeAllText: {
-    color: colors.textColor,
-    fontSize: ms(16),
-  },
-  headingText: {
-    color: colors.textColor,
-    fontSize: ms(18),
-    fontWeight: '500',
-  },
-});

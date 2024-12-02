@@ -4,7 +4,6 @@ export {default as BackButton} from './backButton/backButton';
 export {default as Button} from './button/Button';
 export {default as CategoriesCard} from './categoriesCard/CategoriesCard';
 export {default as CenterHeading} from './centerHeading/CenterHeading';
-export {default as ChangeTheme} from './changeTheme/ChangeTheme';
 export {default as EmptyPage} from './emptyPage/EmptyPage';
 export {default as Header} from './header/Header';
 export {default as HeadingText} from './headingText/HeadingText';

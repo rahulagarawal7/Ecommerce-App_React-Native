@@ -5,6 +5,7 @@ import {colors, ms} from '../../utils';
 import {SearchBar} from '../../component';
 import {t} from 'i18next';
 import {useNavigation} from '@react-navigation/native';
+import {styles} from './styles';
 
 interface BackButtonProps {
   heading?: string;
@@ -31,30 +32,3 @@ const BackButton: React.FC<BackButtonProps> = ({heading = '', searchBox}) => {
 };
 
 export default BackButton;
-
-const styles = StyleSheet.create({
-  container: {
-    height: ms(40),
-    width: ms(40),
-    borderRadius: 40,
-    backgroundColor: colors.secondaryBgColor,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    height: ms(12),
-    width: ms(6),
-  },
-  mainContainer: {
-    width: ms(342),
-    alignItems: 'center',
-    flexDirection: 'row',
-    alignSelf: 'center',
-    gap: 5,
-  },
-  text: {
-    marginHorizontal: 20,
-    color: colors.textColor,
-    fontSize: ms(18),
-  },
-});

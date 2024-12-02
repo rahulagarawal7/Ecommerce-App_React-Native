@@ -1,11 +1,10 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {CartLogo, UserLogo} from '../../assets';
-import {ms} from '../../utils/scale';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {screenNames} from '../../utils/constants';
 import {RootStackParamList} from '../../navigation/types';
-import ChangeTheme from '../changeTheme/ChangeTheme';
+import {styles} from './styles';
 
 const Header: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -14,7 +13,7 @@ const Header: React.FC = () => {
       <View style={styles.profileImage}>
         <Image source={UserLogo} style={styles.userImage} />
       </View>
-      <ChangeTheme />
+
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(screenNames.cart, undefined);
@@ -26,25 +25,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
-const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: ms(20),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  profileImage: {
-    height: ms(40),
-    width: ms(40),
-    borderRadius: ms(40),
-  },
-  userImage: {
-    height: ms(40),
-    width: ms(40),
-    borderRadius: ms(40),
-  },
-  cartLogo: {
-    height: ms(40),
-    width: ms(40),
-  },
-});

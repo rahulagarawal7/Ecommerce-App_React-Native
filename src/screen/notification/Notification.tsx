@@ -3,6 +3,7 @@ import React from 'react';
 import {EmptyPage} from '../../component';
 import {BellEmptyLogo} from '../../assets';
 import {screenNames} from '../../utils/constants';
+import {styles} from './styles';
 
 const Notification = () => {
   return (
@@ -21,14 +22,3 @@ const Notification = () => {
 };
 
 export default Notification;
-
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    flex: 1,
-  },
-  emptyBox: {
-    marginTop: '50%',
-  },
-});

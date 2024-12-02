@@ -15,6 +15,7 @@ import {profileButtonNames} from '../../utils/constants';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {useSelector} from 'react-redux';
 import {t} from 'i18next';
+import {styles} from './styles';
 
 interface RootState {
   user: {
@@ -70,35 +71,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: colors.primaryBgColor,
-    gap: 20,
-  },
-  UserImage: {
-    width: ms(80),
-    height: ms(80),
-    borderRadius: 80,
-  },
-  userImageContainer: {
-    height: ms(180),
-    alignSelf: 'center',
-    justifyContent: 'flex-end',
-  },
-  btnBox: {
-    gap: 10,
-  },
-  scrollViewContainer: {
-    gap: 25,
-  },
-  text: {
-    width: ms(60),
-    fontSize: ms(15),
-    marginBottom: 10,
-    color: colors.tintColor,
-    marginLeft: 5,
-  },
-});

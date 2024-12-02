@@ -3,6 +3,7 @@ import React from 'react';
 import {EmptyPage} from '../../component';
 import {CheckOutEmptyLogo} from '../../assets';
 import {screenNames} from '../../utils/constants';
+import {styles} from './styles';
 
 const Order = () => {
   return (
@@ -21,13 +22,3 @@ const Order = () => {
 };
 
 export default Order;
-const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    flex: 1,
-  },
-  emptyBox: {
-    marginTop: '50%',
-  },
-});

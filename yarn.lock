@@ -1760,6 +1760,11 @@
   resolved "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-21.6.1.tgz"
   integrity sha512-i3RQM11zTRCYc7/KdD0MiCm7UyyTecDXG/89lEv5hvVJMS6ltIfK+0rDheSpBzYlK4kNoK765jnvVAQxIFEqbA==
 
+"@react-native-firebase/messaging@^21.6.1":
+  version "21.6.1"
+  resolved "https://registry.npmjs.org/@react-native-firebase/messaging/-/messaging-21.6.1.tgz"
+  integrity sha512-WoMGcqflDyhwpe5saqJFNKcvRiGRhW764cNv9j9fca11rtzqw186/frvE+QDVuUBEeaOZJg7bW+BV19IToc92g==
+
 "@react-native/assets-registry@0.75.4":
   version "0.75.4"
 
