@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
       height: '100%',
       width: '100%',
       backgroundColor: colors.primaryBgColor,
+      gap:10
     },
     emptyBox: {
       marginTop: '50%',

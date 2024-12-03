@@ -2,21 +2,18 @@ import {
   Alert,
   Image,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BackButton, Button} from '../../component';
-import {colors, ms} from '../../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {RootStackParamList} from '../../navigation/types';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {ProductTypes} from '../../utils/types';
 import {screenNames, showShankBar} from '../../utils/constants';
 import {CartLogo} from '../../assets';
-import Snackbar from 'react-native-snackbar';
 import {styles} from './styles';
 
 interface ProductDetailsProps {
@@ -126,23 +123,26 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <BackButton heading="back" />
-      <ScrollView style={styles.box} showsVerticalScrollIndicator={false}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate(screenNames.cart, undefined);
-          }}>
-          <Image style={styles.cartLogo} source={CartLogo} />
-        </TouchableOpacity>
-        <Image source={{uri: image}} style={styles.imageStyle} />
-        <Text style={styles.text}>{brand}</Text>
-        <Text style={styles.text}>Price - ${price}</Text>
-        <Text style={styles.descText}>{description} </Text>
-        <Text style={styles.textTitle}>{title}</Text>
 
-        <Button
-          buttonName={onCart ? 'remove ' : 'add to cart'}
-          handleSubmit={() => handleClicked(route?.params?.data)}
-        />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.box}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(screenNames.cart, undefined);
+            }}>
+            <Image style={styles.cartLogo} source={CartLogo} />
+          </TouchableOpacity>
+          <Image source={{uri: image}} style={styles.imageStyle} />
+          <Text style={styles.text}>{brand}</Text>
+          <Text style={styles.text}>Price - ${price}</Text>
+          <Text style={styles.descText}>{description} </Text>
+          <Text style={styles.textTitle}>{title}</Text>
+
+          <Button
+            buttonName={onCart ? 'remove ' : 'add to cart'}
+            handleSubmit={() => handleClicked(route?.params?.data)}
+          />
+        </View>
       </ScrollView>
     </View>
   );

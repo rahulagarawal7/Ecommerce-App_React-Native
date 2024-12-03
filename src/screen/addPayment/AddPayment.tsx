@@ -167,17 +167,34 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
             containerStyle={styles.smallInputBox}
             value={exp}
             onChangeText={text => {
+              // Handle removal of '/'
+              if (
+                exp.length > text.length &&
+                exp.charAt(exp.length - 1) === '/'
+              ) {
+                text = text.slice(0, -1); // Remove the trailing slash if user deletes it
+              }
+
+              // Automatically add '/' after entering a valid month
+              if (text.length === 2 && /^[0-1][0-9]$/.test(text)) {
+                text += '/';
+              }
+
               setExp(text);
-              if (/^(0[1-9]|1[0-2])\/?\d{0,2}$/.test(text))
+
+              // Validate the expiry date format
+              if (/^(0[1-9]|1[0-2])\/?\d{0,2}$/.test(text)) {
                 setErrors(prev => ({...prev, exp: ''}));
-              else
+              } else {
                 setErrors(prev => ({
                   ...prev,
-                  exp: 'must be in MM/YY format.',
+                  exp: 'Must be in MM/YY format.',
                 }));
+              }
             }}
             keyboardType="numeric"
           />
+
           {errors.exp ? <Text style={styles.error}>{errors.exp}</Text> : null}
         </View>
       </View>

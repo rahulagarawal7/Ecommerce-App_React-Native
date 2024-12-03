@@ -1,4 +1,10 @@
-import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
@@ -6,6 +12,7 @@ import {colors, mask, ms} from '../../utils';
 import {BackButton, CheckOut} from '../../component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {screenNames} from '../../utils/constants';
+import {styles} from './styles';
 
 interface FinalPaymentProps {
   route: RouteProp<RootStackParamList, 'finalPayment'>;
@@ -16,8 +23,8 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
 
   const [address, setAddress] = useState<string>('');
   const [cardNumber, setCardNumber] = useState<string>('');
-  const [shippingCost,setShippingCost] = useState<number>(0);
-  
+  const [shippingCost, setShippingCost] = useState<number>(0);
+
   const getPayment = async () => {
     const data = await AsyncStorage.getItem('userPayment');
     if (data) {
@@ -46,135 +53,78 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
   useEffect(() => {
     getAddress();
     getPayment();
-    if(totalPrice <= 100){
-       setShippingCost(20);
+    if (totalPrice <= 100) {
+      setShippingCost(20);
     }
   }, []);
 
   const calculateTotal = () => {
-        const total = shippingCost + totalPrice + 20;
-        return total
-  }; 
+    const total = shippingCost + totalPrice + 20;
+    return total;
+  };
   return (
-
     <View style={styles.mainBox}>
       <BackButton heading="back" />
-      <ScrollView>
-      <View style={styles.firstBox}>
-        {address.length > 0 ? (
-          <CheckOut
-            data={address}
-            title="shipping  address"
-            screen={screenNames.addAddress}
-          />
-        ) : (
-          <CheckOut
-            data="Add shipping address"
-            title="billing address"
-            screen={screenNames.addAddress}
-          />
-        )}
-        {cardNumber.length > 0 ? (
-          <CheckOut
-            data={cardNumber}
-            logo ={true}
-            title="payment details"
-            screen={screenNames.addPayment}
-          />
-        ) : (
-          <CheckOut
-            data="Add card details"
-            title="payment details"
-            screen={screenNames.addPayment}
-          />
-        )}
+      <View style={styles.scrollBox}>
+        <ScrollView style={{marginTop: 10}}>
+          <View style={styles.firstBox}>
+            {address.length > 0 ? (
+              <CheckOut
+                data={address}
+                title="shipping  address"
+                screen={screenNames.addAddress}
+              />
+            ) : (
+              <CheckOut
+                data="Add shipping address"
+                title="billing address"
+                screen={screenNames.addAddress}
+              />
+            )}
+            {cardNumber.length > 0 ? (
+              <CheckOut
+                data={cardNumber}
+                logo={true}
+                title="payment details"
+                screen={screenNames.addPayment}
+              />
+            ) : (
+              <CheckOut
+                data="Add card details"
+                title="payment details"
+                screen={screenNames.addPayment}
+              />
+            )}
+            <View style={styles.container}>
+              <View style={styles.price}>
+                <Text>subtotal</Text>
+                <Text>${totalPrice}</Text>
+              </View>
+              <View style={styles.price}>
+                <Text>shipping cost</Text>
+                <Text>${shippingCost}</Text>
+              </View>
+              <View style={styles.price}>
+                <Text>tax</Text>
+                <Text>$20</Text>
+              </View>
+              <View style={styles.price}>
+                <Text>Total</Text>
+                <Text>${calculateTotal()}</Text>
+              </View>
+            </View>
+            <TouchableOpacity style={styles.UPIContainer}>
+              <Text style={styles.UPIText}>Pay with UPI</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+        <TouchableOpacity style={styles.totalBox}>
+          <Text style={styles.textTotal}>place order</Text>
+          <Text style={styles.textTotal}>${calculateTotal()}</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.container}>
-       <View style={styles.price}><Text>subtotal</Text>
-       <Text>${totalPrice}</Text>
-       </View>
-       <View style={styles.price}><Text>shipping cost</Text>
-       <Text>${shippingCost}</Text></View>
-       <View style={styles.price}><Text>tax</Text>
-       <Text>$20</Text></View>
-       <View style={styles.price}><Text>Total</Text>
-       <Text>${calculateTotal()}</Text></View>
-
-
-      </View>
-      <View style={styles.UPIContainer}>
-        <Text style={styles.UPIText}>Pay with UPI</Text>
-        </View>
-      <View>
-      <TouchableOpacity style={styles.totalBox} >
-            <Text style={styles.textTotal}>place order</Text>
-            <Text style={styles.textTotal}>${calculateTotal()}</Text>
-          </TouchableOpacity>
-      </View>
-      </ScrollView>
     </View>
   );
 };
 
 export default FinalPayment;
-
-const styles = StyleSheet.create({
-  container: {
-    height: ms(150),
-    width: ms(342),
-    borderWidth: 0.5,
-    alignSelf: 'center',
-    backgroundColor: colors.secondaryBgColor,
-    borderRadius: 10,
-    marginTop: '5%',
-    gap:ms(20),
-    justifyContent:'center',
-  },
-  price:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    marginHorizontal:ms(10),
-  },
-  mainBox: {
-    height: ms(844),
-    width: ms(390),
-    backgroundColor: colors.primaryBgColor,
-    alignSelf:'center',
-  },
-  firstBox: {
-    marginTop: ms(20),
-    gap: ms(15),
-  },
-  UPIText:{
-    color:colors.textColor,
-    fontSize:ms(16),
-    fontWeight:'600',
-    alignSelf:'center',
-  },
-  UPIContainer:{
-    backgroundColor:colors.secondaryBgColor,
-    height:ms(30),
-    width:ms(342),
-    alignSelf:'center',
-    borderRadius:ms(10),
-    justifyContent:'center',
-    marginTop:ms(15),
-  },
-  totalBox: {
-    height: ms(50),
-    width: ms(342),
-    backgroundColor: colors.tintColor,
-    alignSelf: 'center',
-    borderRadius: 10,
-    marginVertical: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-    marginTop:'30%',
-  },
-  textTotal: {
-    fontSize: ms(20),
-    color: colors.primaryBgColor,
-  },
-});
