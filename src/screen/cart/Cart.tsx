@@ -34,7 +34,7 @@ const Cart: React.FC<CartProps> = ({navigation}) => {
   const getPayment = () => {
     const totalPrice = calculateTotal();
     if (totalPrice)
-      navigation.navigate(screenNames.finalPayment, {price: totalPrice});
+      {navigation.navigate(screenNames.finalPayment, {price: totalPrice});}
   };
 
   const loadCartProducts = async () => {
