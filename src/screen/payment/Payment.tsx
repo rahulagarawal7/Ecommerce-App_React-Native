@@ -14,6 +14,7 @@ import {RootStackParamList} from '../../navigation/types';
 import {screenNames} from '../../utils/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PaymentType} from '../../utils/types';
+import {styles} from './styles';
 
 const Payment = () => {
   const [cardNumber, setCardNumber] = useState<number>(0);
