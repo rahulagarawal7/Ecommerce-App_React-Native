@@ -10,9 +10,13 @@ const Header: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <View style={styles.container}>
-      <View style={styles.profileImage}>
+      <TouchableOpacity
+        style={styles.profileImage}
+        onPress={() => {
+          navigation.navigate(screenNames.userProfile, undefined);
+        }}>
         <Image source={UserLogo} style={styles.userImage} />
-      </View>
+      </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => {

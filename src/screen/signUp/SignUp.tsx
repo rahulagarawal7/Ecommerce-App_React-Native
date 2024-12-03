@@ -10,6 +10,7 @@ import {useDispatch} from 'react-redux';
 import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
 import PasswordInputBox from '../../component/passwordInputBox/passwordInputBox';
 import {styles} from './styles';
+import {showShankBar} from '../../utils/constants';
 
 interface SignUpProps {
   navigation: NavigationProp<RootStackParamList>;
@@ -25,6 +26,14 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
   const handleSignUp = async () => {
     if (!email || !password || !name || !phone) {
       Alert.alert('Error', 'Please fill all fields!');
+      return;
+    }
+    if (name.length < 3) {
+      showShankBar('Name must be more the 3 character');
+      return;
+    }
+    if (phone.length > 10 || phone.length < 10) {
+      showShankBar('Enter valid phone number');
       return;
     }
 
@@ -66,7 +75,7 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
           onChangeText={setName}
         />
         <InputBox
-          keyboardType="number"
+          keyboardType="numeric"
           placeholder="phone"
           containerStyle={styles.input}
           onChangeText={setPhone}
@@ -78,7 +87,7 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
           onChangeText={setEmail}
         />
         <PasswordInputBox
-          keyboardType="text"
+          keyboardType="password"
           placeholder="password"
           containerStyle={styles.input}
           onChangeText={setPassword}

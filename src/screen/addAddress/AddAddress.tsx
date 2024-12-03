@@ -111,11 +111,11 @@ const AddAddress: React.FC<AddAddressProps> = ({navigation}) => {
           onChangeText={setUserState}
         />
         <InputBox
-          keyboardType="number"
           placeholder="zip code"
           containerStyle={styles.smallInputBox}
           value={zipCode}
           onChangeText={setZipCode}
+          keyboardType="numeric"
         />
       </View>
       <Button buttonName={btnName} handleSubmit={handleSubmit} />
