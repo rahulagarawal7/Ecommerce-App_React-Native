@@ -23,7 +23,6 @@ import {firebase} from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {addUserImage, addUserInfo} from '../../redux/slices/userSlice/userSlice';
 import {styles} from './styles';
-import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -38,11 +37,7 @@ const Home: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch();
   const userInfo = useSelector(store => store?.user?.userInfo);
 
-  const getToken = async () => {
-    await messaging().registerDeviceForRemoteMessages();
-    const token = await messaging().getToken();
-    console.log('token -->', token);
-  };
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -54,7 +49,6 @@ const Home: React.FC<Props> = ({navigation}) => {
   }, [data, userInfo]);
 
   useEffect(() => {
-    getToken();
     getUserImage()
   }, []);
 

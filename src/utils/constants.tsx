@@ -76,6 +76,7 @@ export const screenNames = {
   categoriesWiseList: 'CategoriesWiseList',
   productDetails: 'ProductDetails',
   finalPayment: 'FinalPayment',
+  explore:'Explore',
 };
 
 export const API_ROUTES = {
@@ -86,9 +87,10 @@ export const profileButtonNames = [
   {id: 1, name: 'address', screenName: screenNames.address},
   {id: 2, name: 'wishlist', screenName: screenNames.wishlist},
   {id: 3, name: 'payment', screenName: screenNames.payment},
-  {id: 4, name: 'help', screenName: screenNames.help},
-  {id: 5, name: 'support', screenName: screenNames.support},
-  {id: 6, name: 'language', screenName: screenNames.language},
+  {id: 4, name: 'language', screenName: screenNames.language},
+  {id:5,  name:'explore store' , screenName:screenNames.explore},
+  {id: 6, name: 'help', screenName: screenNames.help},
+  {id: 7, name: 'support', screenName: screenNames.support},
 ];
 
 export const showShankBar = (title: string, error?: string) => {

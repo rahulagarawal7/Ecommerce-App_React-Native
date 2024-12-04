@@ -22,6 +22,7 @@ import {LoadingState} from '../../redux/slices/types';
 import {styles} from './styles';
 import ImagePicker from 'react-native-image-crop-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { t } from 'i18next';
 
 interface RootState {
   loading: LoadingState;
@@ -32,8 +33,6 @@ const UserProfile: React.FC = () => {
   const dispatch = useDispatch();
   const loading = useSelector((store: RootState) => store?.loading?.loading);
   const userImage = useSelector(store=>store?.user.userImage);
-
-  console.log("-0-0-0-0-", typeof userImage)
   const [email, setEmail] = useState(user?.email || '');
   const [name, setName] = useState(user?.displayName || '');
   const [phone, setPhone] = useState(user?.photoURL || '');
@@ -43,7 +42,7 @@ const UserProfile: React.FC = () => {
     dispatch(setLoading(true));
     try {
       if (!user) {
-        Alert.alert('Error', 'User not logged in.');
+        Alert.alert(t('error'), t('user not logged in.'));
         return;
       }
 
@@ -53,38 +52,20 @@ const UserProfile: React.FC = () => {
       });
 
       await user.reload();
-      Alert.alert('Success', 'Profile updated successfully!');
+      Alert.alert(t('success'), t('profile updated successfully!'));
       console.log('Updated user:', firebase.auth().currentUser);
       dispatch(addUserInfo(firebase.auth().currentUser));
     } catch (error) {
       console.error('Error updating user profile:', error);
-      Alert.alert('Error', 'Failed to update profile.');
+      Alert.alert(t('error'), t('failed to update profile.'));
     } finally {
       dispatch(setLoading(false));
     }
   };
 
-const getPhotoFromGlary = ()=>{
-  ImagePicker.openPicker({
-    width: 300,
-    height: 400,
-    cropping: true,
-  }).then(image => {
-   console.log('0----->',image.path)
-        if(image){
-          saveUserImage(image.path)
-        }
-  });
-}
 
-const saveUserImage=async(image:string)=>{
-  try {
-    await AsyncStorage.setItem('userImage', JSON.stringify(image));
-    dispatch(addUserImage(image));
-  } catch (error) {
-    Alert.alert('Failed to save image')
-  }
-}
+
+
   return (
 
     <TouchableWithoutFeedback onPress={()=>setShow(false)} >
@@ -95,7 +76,7 @@ const saveUserImage=async(image:string)=>{
           <Modal transparent={true} visible={loading} animationType="fade">
         <View style={styles.loaderOverlay}>
           <ActivityIndicator size="large" color={colors.tintColor} />
-          <Text style={styles.loaderText}>Updating Profile...</Text>
+          <Text style={styles.loaderText}>{t('updating profile...')}</Text>
         </View>
       </Modal>
       <ScrollView>
@@ -129,7 +110,7 @@ const saveUserImage=async(image:string)=>{
             editable={false}
           />
 
-          <Button buttonName="Update" handleSubmit={handleSubmit} />
+          <Button buttonName={t('update')} handleSubmit={handleSubmit} />
         </View>
       </ScrollView>
       {show && <ImageOption setShow={setShow} show={show}/>}

@@ -28,14 +28,14 @@ const Profile = () => {
   const userImage = useSelector((store)=>store?.user.userImage);
 
   const handleSignOut = () => {
-    Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
+    Alert.alert(t('sign out'), t('are you sure you want to sign out?'), [
       {
-        text: 'Cancel',
+        text: t('cancel'),
         onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
       {
-        text: 'OK',
+        text: t('ok'),
         onPress: () => {
           console.log('OK Pressed');
           auth()
@@ -66,7 +66,7 @@ const Profile = () => {
         ))}
 
         <Text style={styles.text} onPress={() => handleSignOut()}>
-          {t('signOut')}
+          {t('sign out')}
         </Text>
       </View>
     </ScrollView>

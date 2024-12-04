@@ -15,6 +15,7 @@ import {ProductTypes} from '../../utils/types';
 import {screenNames, showShankBar} from '../../utils/constants';
 import {CartLogo} from '../../assets';
 import {styles} from './styles';
+import { t } from 'i18next';
 
 interface ProductDetailsProps {
   route: RouteProp<RootStackParamList, 'productDetails'>;
@@ -84,20 +85,20 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route, navigation}) => {
   const handleClicked = (product: ProductTypes) => {
     if (onCart) {
       Alert.alert(
-        'Remove from Cart',
-        'Are you sure you want to remove this product from your Cart?',
+        t('remove from cart'),
+        t('are you sure you want to remove this product from your Cart?'),
         [
-          {text: 'Cancel', style: 'cancel'},
-          {text: 'Remove', onPress: () => removeCartProduct(product)},
+          {text: t('cancel'), style: 'cancel'},
+          {text: t('remove'), onPress: () => removeCartProduct(product)},
         ],
       );
     } else {
       Alert.alert(
-        'Add to  Cart',
-        'Are you sure you want to add  this product to your Cart?',
+        t('add to cart'),
+        t('are you sure you want to add  this product to your cart?'),
         [
-          {text: 'Cancel', style: 'cancel'},
-          {text: 'Save', onPress: () => saveToCart(product)},
+          {text: t('cancel'), style: 'cancel'},
+          {text: t('save'), onPress: () => saveToCart(product)},
         ],
       );
     }
@@ -137,9 +138,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route, navigation}) => {
           <Text style={styles.text}>Price - ${price}</Text>
           <Text style={styles.descText}>{description} </Text>
           <Text style={styles.textTitle}>{title}</Text>
-
           <Button
-            buttonName={onCart ? 'remove ' : 'add to cart'}
+            buttonName={onCart ? t('remove ') : t('add to cart')}
             handleSubmit={() => handleClicked(route?.params?.data)}
           />
         </View>

@@ -20,3 +20,4 @@ export {default as Language} from './language/Language.tsx';
 export {default as CategoriesWiseList} from './categoriesWiseList/CategoriesWiseList.tsx';
 export {default as ProductDetails} from './productDetails/ProductDetails.tsx';
 export {default as FinalPayment} from './finalPayment/FinalPayment.tsx';
+export {default as Explore} from './explore/Explore.tsx';

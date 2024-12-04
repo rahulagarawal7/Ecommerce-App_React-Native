@@ -90,11 +90,11 @@ const Cart: React.FC<CartProps> = ({navigation}) => {
 
   const handleRemovePress = (productId: number | undefined) => {
     Alert.alert(
-      'Remove from cart',
-      'Are you sure you want to remove this product from your cart?',
+      t('remove from cart'),
+      t('Are you sure you want to remove this product from your cart?'),
       [
-        {text: 'Cancel', style: 'cancel'},
-        {text: 'Remove', onPress: () => removeFromCart(productId)},
+        {text: t('cancel'), style: 'cancel'},
+        {text: t('remove'), onPress: () => removeFromCart(productId)},
       ],
     );
   };
