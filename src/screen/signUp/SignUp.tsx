@@ -56,10 +56,10 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
     } catch (error) {
       if (error instanceof Error) {
         console.error('Error during sign up:', error);
-        Alert.alert('Error', error.message);
+        Alert.alert(t('error'), error.message);
       } else {
         console.error('Error during sign up:', error);
-        Alert.alert('Error', 'An error occurred during sign up');
+        Alert.alert(t('Error'), t('an error occurred during sign up'));
       }
     }
   };

@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
       gap: 25,
     },
     text: {
-      width: ms(60),
+     
       fontSize: ms(15),
       marginBottom: 10,
       color: colors.tintColor,

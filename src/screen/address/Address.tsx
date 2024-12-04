@@ -1,13 +1,11 @@
-import {Alert, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Alert, ScrollView, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
   AddressCard,
   BackButton,
   Button,
   EmptyPage,
-  InputBox,
 } from '../../component';
-import {colors, ms} from '../../utils';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {EmptyAddressLogo} from '../../assets';
 import {screenNames} from '../../utils/constants';
@@ -15,6 +13,7 @@ import {RootStackParamList} from '../../navigation/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AddressType} from '../../utils/types';
 import {styles} from './styles';
+import { t } from 'i18next';
 
 const Address = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -37,16 +36,16 @@ const Address = () => {
   };
   const deleteAddress = async () => {
     Alert.alert(
-      'Delete Address',
-      'Are you sure you want to delete this address?',
+      t('delete address'),
+      t('are you sure you want to delete this address?'),
       [
         {
-          text: 'Cancel',
+          text: t('cancel'),
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         {
-          text: 'Delete',
+          text: t('delete'),
           onPress: async () => {
             try {
               await AsyncStorage.removeItem('userAddress');

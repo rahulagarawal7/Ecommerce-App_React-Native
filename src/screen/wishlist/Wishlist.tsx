@@ -60,11 +60,11 @@ const Wishlist = () => {
 
   const handleRemovePress = (productId: number | undefined) => {
     Alert.alert(
-      'Remove from Wishlist',
-      'Are you sure you want to remove this product from your wishlist?',
+      t('remove from wishlist'),
+      t('are you sure you want to remove this product from your wishlist?'),
       [
-        {text: 'Cancel', style: 'cancel'},
-        {text: 'Remove', onPress: () => removeFromWishlist(productId)},
+        {text: t('cancel'), style: 'cancel'},
+        {text: t('remove'), onPress: () => removeFromWishlist(productId)},
       ],
     );
   };
@@ -93,8 +93,8 @@ const Wishlist = () => {
         <>
           <View style={styles.emptyBox}>
             <EmptyPage
-              title="Your wishlist is empty"
-              btnName="Explore Categories"
+              title="your wishlist is empty"
+              btnName="explore categories"
               image={CartEmptyLogo}
               btn={true}
               navigationScreeName="seeAllCategories"

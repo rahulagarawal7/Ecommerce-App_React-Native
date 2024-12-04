@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { addUserImage, removeUserImage } from '../../redux/slices/userSlice/userSlice';
 import { showShankBar } from '../../utils/constants';
+import { t } from 'i18next';
 
 interface ImageOptionProp{
    setShow:Function,
@@ -22,7 +23,6 @@ const ImageOption:React.FC<ImageOptionProp> = ({setShow,show}) => {
     height: 400,
     cropping: true,
   }).then(image => {
-    console.log('0----->',image.path);
     if(image){
       saveUserImage(image.path);
     }
@@ -49,15 +49,15 @@ const saveUserImage = async(image:string)=>{
     dispatch(addUserImage(image));
     setShow(!show);
 
-    showShankBar('Added user Profile photo');
+    showShankBar(t('added user profile photo'));
   } catch (error) {
-    Alert.alert('Failed to save image');
+    Alert.alert(t('failed to save image'));
   }
 }
 
 const handleDelete = ()=>{
   dispatch(removeUserImage());
-  showShankBar('deleted user Image');
+  showShankBar(t('deleted user Image'));
   setShow(!show);
 };
 
@@ -65,13 +65,13 @@ const handleDelete = ()=>{
     <View style={styles.container}>
       <TouchableOpacity style={styles.box}><Text style={styles.text}
       onPress={handleGallery}
-      >Add from Gallery</Text></TouchableOpacity>
+      >{t('add from gallery')}</Text></TouchableOpacity>
       <TouchableOpacity style={styles.box}><Text style={styles.text}
       onPress={handleCamera}
-      >Add from Camera</Text></TouchableOpacity>
+      >{t('add from camera')}</Text></TouchableOpacity>
       <TouchableOpacity  style={styles.box}
       onPress={handleDelete}
-      ><Text style={styles.delete}>Delete</Text></TouchableOpacity>
+      ><Text style={styles.delete}>{t('delete')}</Text></TouchableOpacity>
     </View>
   );
 };

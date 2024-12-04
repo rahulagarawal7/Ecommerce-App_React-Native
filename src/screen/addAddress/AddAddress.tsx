@@ -14,6 +14,7 @@ import {screenNames, showShankBar} from '../../utils/constants';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
 import {styles} from './styles';
+import { t } from 'i18next';
 
 interface AddAddressProps {
   navigation: NavigationProp<RootStackParamList, 'Profile'>;
@@ -29,7 +30,7 @@ const AddAddress: React.FC<AddAddressProps> = ({navigation}) => {
   const handleSubmit = async () => {
     if (!streetAddress || !city || !userState || !zipCode) {
       // Check if all fields are filled
-      Alert.alert('Please fill all fields');
+      Alert.alert(t('please fill all fields'));
       return;
     }
 
@@ -37,35 +38,35 @@ const AddAddress: React.FC<AddAddressProps> = ({navigation}) => {
 
     try {
       if (btnName === 'update') {
-        Alert.alert('Update Address', 'are you want to update address', [
+        Alert.alert(t('update address'), t('are you want to update address'), [
           {
             text: 'Cancel',
             onPress: () => console.log('Cancel Pressed'),
             style: 'cancel',
           },
           {
-            text: 'OK',
+            text: t('ok'),
             onPress: async () => {
               console.log('OK Pressed');
               await AsyncStorage.setItem(
                 'userAddress',
                 JSON.stringify(address),
               );
-              showShankBar('Address Updated successfully!');
+              showShankBar(t('address updated successfully!'));
               navigation.navigate(screenNames.profile, undefined);
             },
           },
         ]);
       } else {
-        Alert.alert('Address saved successfully!');
+        Alert.alert(t('address saved successfully!'));
         await AsyncStorage.setItem('userAddress', JSON.stringify(address));
-        showShankBar('Address saved successfully!');
+        showShankBar(t('address saved successfully!'));
         navigation.navigate(screenNames.profile, undefined);
       }
     } catch (error) {
       console.error('Error saving address:', error);
-      Alert.alert('Failed to save address');
-      showShankBar('Failed to save address', 'error');
+      Alert.alert(t('failed to save address'));
+      showShankBar(t('failed to save address'), 'error');
     } finally {
     }
   };

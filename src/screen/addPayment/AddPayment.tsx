@@ -7,6 +7,7 @@ import {screenNames, showShankBar} from '../../utils/constants';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
 import {styles} from './styles';
+import { t } from 'i18next';
 
 interface AddPaymentProps {
   navigation: NavigationProp<RootStackParamList, 'Profile'>;
@@ -17,7 +18,7 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
   const [ccv, setCcv] = useState('');
   const [exp, setExp] = useState('');
   const [cardholderName, setCardholderName] = useState('');
-  const [btnName, setBtnName] = useState('Add');
+  const [btnName, setBtnName] = useState(t('Add'));
   const [errors, setErrors] = useState({
     cardNumber: '',
     ccv: '',
@@ -66,14 +67,14 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
 
     try {
       if (btnName === 'update') {
-        Alert.alert('Update Payment', 'are you want to update Payment', [
+        Alert.alert(t('Update Payment'), t('are you want to update Payment'), [
           {
-            text: 'Cancel',
+            text: t('cancel'),
             onPress: () => console.log('Cancel Pressed'),
             style: 'cancel',
           },
           {
-            text: 'OK',
+            text: t('ok'),
             onPress: async () => {
               console.log('OK Pressed');
               await AsyncStorage.setItem(
@@ -90,14 +91,14 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
           'userPayment',
           JSON.stringify(paymentDetails),
         );
-        Alert.alert('Success', 'Payment details saved successfully!');
+        Alert.alert(t('success'), t('payment details saved successfully!'));
         setBtnName('Update');
-        showShankBar('Payment saved successfully!');
+        showShankBar(t('payment details saved successfully!'));
         navigation.navigate(screenNames.profile, undefined);
       }
     } catch (error) {
       console.error('Error saving payment details:', error);
-      Alert.alert('Error', 'Failed to save payment details.');
+      Alert.alert(t('error'), t('failed to save payment details.'));
     }
   };
 
@@ -114,7 +115,7 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
       }
     } catch (error) {
       console.error('Error fetching payment details:', error);
-      Alert.alert('Error', 'Failed to fetch payment details.');
+      Alert.alert(t('Error'), t('failed to fetch payment details.'));
     }
   };
 
@@ -136,7 +137,7 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
           else
             setErrors(prev => ({
               ...prev,
-              cardNumber: 'Card number must be 12 digits.',
+              cardNumber: t('Card number must be 12 digits.'),
             }));
         }}
         keyboardType="numeric"
@@ -155,7 +156,7 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
               setCcv(text);
               if (/^\d{0,3}$/.test(text))
                 setErrors(prev => ({...prev, ccv: ''}));
-              else setErrors(prev => ({...prev, ccv: 'CCV must be 3 digits.'}));
+              else setErrors(prev => ({...prev, ccv: t('CCV must be 3 digits.')}));
             }}
             keyboardType="numeric"
           />
@@ -188,7 +189,7 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
               } else {
                 setErrors(prev => ({
                   ...prev,
-                  exp: 'Must be in MM/YY format.',
+                  exp: t('Must be in MM/YY format.'),
                 }));
               }
             }}
@@ -209,7 +210,7 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
           else
             setErrors(prev => ({
               ...prev,
-              cardholderName: 'Cardholder name must contain only letters.',
+              cardholderName: t('Cardholder name must contain only letters.'),
             }));
         }}
         keyboardType="default"
@@ -218,7 +219,7 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
         <Text style={styles.error}>{errors.cardholderName}</Text>
       ) : null}
 
-      <Button buttonName={btnName} handleSubmit={handleSubmit} />
+      <Button buttonName={t(btnName)} handleSubmit={handleSubmit} />
     </View>
   );
 };

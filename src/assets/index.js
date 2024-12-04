@@ -11,7 +11,7 @@ export {default as SearchIcon} from './icons/search.png';
 export {default as EyeLogo} from './icons/eye.png';
 export {default as HiddenLogo} from './icons/hidden.png';
 export {default as CategoriesImage1} from './images/categories/categories1.png';
-export {default as CategoriesImage2} from './images/categories/categories2.png';
+export {default as CategoriesImage2} from './images/categories/categories.png';
 export {default as CategoriesImage3} from './images/categories/categories3.png';
 export {default as CategoriesImage4} from './images/categories/categories4.png';
 export {default as CategoriesImage5} from './images/categories/categories5.png';

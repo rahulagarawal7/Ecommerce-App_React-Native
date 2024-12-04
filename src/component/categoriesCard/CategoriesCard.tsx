@@ -13,24 +13,28 @@ const CategoriesCard: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {categoriesList.map(category => (
-        <TouchableOpacity
-          key={category.id}
-          style={styles.box}
-          onPress={() =>
-            navigation.navigate(screenNames.categoriesWiseList, {
-              name: category.categoriesName,
-            })
-          }>
-          <View style={styles.imageBox}>
-            <Image source={category.categoriesImage} style={styles.image} />
-          </View>
-
-          <Text style={styles.categoriesNameText}>
-            {t(category.categoriesName)}
-          </Text>
-        </TouchableOpacity>
-      ))}
+      {categoriesList.map(category =>{
+        return(
+          (
+            <TouchableOpacity
+              key={category.id}
+              style={styles.box}
+              onPress={() =>
+                navigation.navigate(screenNames.categoriesWiseList, {
+                  name: category.categoriesName,
+                })
+              }>
+              <View style={styles.imageBox}>
+                <Image source={category.categoriesImage} style={styles.image} />
+              </View>
+    
+              <Text style={styles.categoriesNameText}>
+                {t(category.categoriesName)}
+              </Text>
+            </TouchableOpacity>
+          )
+        )
+      })}
     </View>
   );
 };

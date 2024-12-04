@@ -15,6 +15,7 @@ import {screenNames} from '../../utils/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PaymentType} from '../../utils/types';
 import {styles} from './styles';
+import { t } from 'i18next';
 
 const Payment = () => {
   const [cardNumber, setCardNumber] = useState<number>(0);
@@ -38,16 +39,16 @@ const Payment = () => {
   };
   const deletePayment = async () => {
     Alert.alert(
-      'Delete Payment',
-      'Are you sure you want to delete this Payment?',
+      t('delete payment'),
+      t('are you sure you want to delete this payment?'),
       [
         {
-          text: 'Cancel',
+          text: t('cancel'),
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         {
-          text: 'Delete',
+          text: t('delete'),
           onPress: async () => {
             try {
               await AsyncStorage.removeItem('userPayment');
@@ -87,10 +88,10 @@ const Payment = () => {
         )}
       </ScrollView>
       {!payments ? (
-        <Button buttonName="add" handleSubmit={addAddress} style={styles.btn} />
+        <Button buttonName={t('add')} handleSubmit={addAddress} style={styles.btn} />
       ) : (
         <Button
-          buttonName="delete"
+          buttonName={t('delete')}
           handleSubmit={deletePayment}
           style={styles.btn}
         />
