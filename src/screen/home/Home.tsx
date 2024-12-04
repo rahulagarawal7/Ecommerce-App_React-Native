@@ -21,9 +21,10 @@ import {useAppSelector} from '../../redux/store/store';
 import {ProductTypes} from '../../utils/types';
 import {firebase} from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
-import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
+import {addUserImage, addUserInfo} from '../../redux/slices/userSlice/userSlice';
 import {styles} from './styles';
 import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -54,7 +55,16 @@ const Home: React.FC<Props> = ({navigation}) => {
 
   useEffect(() => {
     getToken();
+    getUserImage()
   }, []);
+
+const getUserImage=async()=>{
+  const data = await AsyncStorage.getItem('userImage')
+  if(data){
+    const image=JSON.parse(data);
+    dispatch(addUserImage(image));
+  }
+}
 
   return (
     <ScrollView style={styles.container}>

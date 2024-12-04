@@ -19,3 +19,4 @@ export {default as ProductCardList} from './productCardList/ProductCardList';
 export {default as SeeAllProductList} from './seeAllProductList/SeeAllProductList';
 export {default as CategoriesHeading} from './categoriesHeading/CategoriesHeading';
 export {default as CheckOut} from './checkOutCard/CheckOutCard';
+export {default as ImageOption} from './imageOption/ImageOption';

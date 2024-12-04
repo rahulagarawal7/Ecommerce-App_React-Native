@@ -2862,6 +2862,15 @@ PODS:
     - FirebaseCoreExtension
     - React-Core
     - RNFBApp
+  - RNImageCropPicker (0.41.6):
+    - React-Core
+    - React-RCTImage
+    - RNImageCropPicker/QBImagePickerController (= 0.41.6)
+    - TOCropViewController (~> 2.7.4)
+  - RNImageCropPicker/QBImagePickerController (0.41.6):
+    - React-Core
+    - React-RCTImage
+    - TOCropViewController (~> 2.7.4)
   - RNScreens (3.35.0):
     - DoubleConversion
     - glog
@@ -2887,6 +2896,7 @@ PODS:
   - RNSnackbar (2.8.0):
     - React-Core
   - SocketRocket (0.7.0)
+  - TOCropViewController (2.7.4)
   - Yoga (0.0.0)
 
 DEPENDENCIES:
@@ -2960,6 +2970,7 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSnackbar (from `../node_modules/react-native-snackbar`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -2990,6 +3001,7 @@ SPEC REPOS:
     - PromisesObjC
     - RecaptchaInterop
     - SocketRocket
+    - TOCropViewController
 
 EXTERNAL SOURCES:
   boost:
@@ -3129,6 +3141,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNFBMessaging:
     :path: "../node_modules/@react-native-firebase/messaging"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSnackbar:
@@ -3228,11 +3242,13 @@ SPEC CHECKSUMS:
   RNFBAuth: 15a007eecd6ba7b9e52b45e2b41cdf6fe9f13968
   RNFBFirestore: 6db2eb460dd774c0a28210fcee2c80a4afbd54dc
   RNFBMessaging: dd213f66f36b249f9ab035efe24dc2a3ede8f8c5
+  RNImageCropPicker: 8e39c01f205e00d739c31e682f068aac315587bf
   RNScreens: 16b782596e80e475b7f3ec769c9a97d789d9b0ed
   RNSnackbar: 37ce6daf19c8bd35cf6133db5797aa298c8782ac
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
+  TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: b05994d1933f507b0a28ceaa4fdb968dc18da178
 
 PODFILE CHECKSUM: 3a6f25e39aa122748c3321eef59ffdee7e59e7c1
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

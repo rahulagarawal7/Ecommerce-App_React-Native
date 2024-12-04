@@ -1,5 +1,29 @@
 {
-    "cSpell.words": [
-        "perticullar"
-    ]
-}
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "workbench.startupEditor": "newUntitledFile",
+    "eslint.enable": true,
+    "editor.fontSize": 12,
+    "editor.fontLigatures": true,
+    "editor.wordWrap": "on",
+    "cSpell.diagnosticLevel": "Hint",
+    "cSpell.userWords": [],
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier": {
+      "singleQuote": true,
+      "semi": false
+    },
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "update.mode": "manual",
+    "settingsSync.ignoredSettings": []
+  }

@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     container: {
       marginHorizontal: ms(20),
       flexDirection: 'row',
+      marginTop:ms(10),
       justifyContent: 'space-between',
     },
     profileImage: {
