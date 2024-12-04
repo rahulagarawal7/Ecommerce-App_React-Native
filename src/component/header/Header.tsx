@@ -1,13 +1,18 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import React from 'react';
-import {CartLogo, UserLogo} from '../../assets';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {screenNames} from '../../utils/constants';
-import {RootStackParamList} from '../../navigation/types';
-import {styles} from './styles';
+import { CartLogo, UserLogo } from '../../assets';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { screenNames } from '../../utils/constants';
+import { RootStackParamList } from '../../navigation/types';
+import { styles } from './styles';
+import { useSelector } from 'react-redux';
+
+
 
 const Header: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const userImage = useSelector(store => store?.user.userImage);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -15,9 +20,8 @@ const Header: React.FC = () => {
         onPress={() => {
           navigation.navigate(screenNames.userProfile, undefined);
         }}>
-        <Image source={UserLogo} style={styles.userImage} />
+        <Image source={userImage?.length>0 ? {uri:userImage} : UserLogo} style={styles.userImage} />
       </TouchableOpacity>
-
       <TouchableOpacity
         onPress={() => {
           navigation.navigate(screenNames.cart, undefined);

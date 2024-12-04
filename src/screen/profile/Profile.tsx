@@ -25,6 +25,7 @@ interface RootState {
 
 const Profile = () => {
   const userInfo = useSelector((store: RootState) => store?.user?.userInfo);
+  const userImage = useSelector((store)=>store?.user.userImage);
 
   const handleSignOut = () => {
     Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
@@ -50,7 +51,9 @@ const Profile = () => {
       style={styles.container}
       contentContainerStyle={styles.scrollViewContainer}>
       <View style={styles.userImageContainer}>
-        <Image source={UserLogo} style={styles.UserImage} />
+      <Image source={userImage?.length>0 ? {uri:userImage} : UserLogo} style={styles.userImage} />
+      
+   
       </View>
       <NameAddressCard userInfo={userInfo} />
       <View style={styles.btnBox}>

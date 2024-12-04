@@ -6,18 +6,22 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {BackButton, Button, InputBox} from '../../component';
+import {BackButton, Button, ImageOption, InputBox} from '../../component';
 import {colors, ms} from '../../utils';
 import {UserLogo} from '../../assets';
 import {firebase} from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
-import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
+import {addUserImage, addUserInfo} from '../../redux/slices/userSlice/userSlice';
 import {setLoading} from '../../redux/slices/loading/loadingSlice';
 import {LoadingState} from '../../redux/slices/types';
 import {styles} from './styles';
+import ImagePicker from 'react-native-image-crop-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface RootState {
   loading: LoadingState;
@@ -27,10 +31,13 @@ const UserProfile: React.FC = () => {
   const user = firebase.auth().currentUser;
   const dispatch = useDispatch();
   const loading = useSelector((store: RootState) => store?.loading?.loading);
+  const userImage = useSelector(store=>store?.user.userImage);
 
+  console.log("-0-0-0-0-", typeof userImage)
   const [email, setEmail] = useState(user?.email || '');
   const [name, setName] = useState(user?.displayName || '');
   const [phone, setPhone] = useState(user?.photoURL || '');
+  const [show,setShow]=useState(false);
 
   const handleSubmit = async () => {
     dispatch(setLoading(true));
@@ -56,9 +63,36 @@ const UserProfile: React.FC = () => {
       dispatch(setLoading(false));
     }
   };
+
+const getPhotoFromGlary = ()=>{
+  ImagePicker.openPicker({
+    width: 300,
+    height: 400,
+    cropping: true,
+  }).then(image => {
+   console.log('0----->',image.path)
+        if(image){
+          saveUserImage(image.path)
+        }
+  });
+}
+
+const saveUserImage=async(image:string)=>{
+  try {
+    await AsyncStorage.setItem('userImage', JSON.stringify(image));
+    dispatch(addUserImage(image));
+  } catch (error) {
+    Alert.alert('Failed to save image')
+  }
+}
   return (
-    <View style={styles.outerBox}>
-      <Modal transparent={true} visible={loading} animationType="fade">
+
+    <TouchableWithoutFeedback onPress={()=>setShow(false)} >
+<View style={styles.outerBox}>
+
+
+    
+          <Modal transparent={true} visible={loading} animationType="fade">
         <View style={styles.loaderOverlay}>
           <ActivityIndicator size="large" color={colors.tintColor} />
           <Text style={styles.loaderText}>Updating Profile...</Text>
@@ -67,9 +101,12 @@ const UserProfile: React.FC = () => {
       <ScrollView>
         <BackButton heading={'back'} />
         <View style={styles.container}>
-          <View style={styles.userImageBox}>
-            <Image source={UserLogo} style={styles.userImage} />
-          </View>
+          <TouchableOpacity style={styles.userImageBox} 
+          onPress={()=>setShow(!show)}
+          >
+        <Image source={userImage?.length>0 ? {uri:userImage} : UserLogo} style={styles.userImage} />
+       
+          </TouchableOpacity>
 
           <InputBox
             placeholder="name"
@@ -95,7 +132,10 @@ const UserProfile: React.FC = () => {
           <Button buttonName="Update" handleSubmit={handleSubmit} />
         </View>
       </ScrollView>
-    </View>
+      {show && <ImageOption setShow={setShow} show={show}/>}
+
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

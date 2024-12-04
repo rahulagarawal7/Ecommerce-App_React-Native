@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primaryBgColor,
     height: '100%',
     width: '100%',
+    
   },
   userImageBox: {
     height: ms(120),

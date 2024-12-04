@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
       backgroundColor: colors.primaryBgColor,
       gap: 20,
     },
-    UserImage: {
+    userImage: {
       width: ms(80),
       height: ms(80),
       borderRadius: 80,
