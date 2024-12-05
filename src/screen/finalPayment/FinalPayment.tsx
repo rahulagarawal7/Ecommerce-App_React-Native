@@ -13,6 +13,7 @@ import {BackButton, CheckOut} from '../../component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {screenNames} from '../../utils/constants';
 import {styles} from './styles';
+import { t } from 'i18next';
 
 interface FinalPaymentProps {
   route: RouteProp<RootStackParamList, 'finalPayment'>;
@@ -71,7 +72,7 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
             {address.length > 0 ? (
               <CheckOut
                 data={address}
-                title="shipping  address"
+                title="shipping address"
                 screen={screenNames.addAddress}
               />
             ) : (
@@ -97,29 +98,29 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
             )}
             <View style={styles.container}>
               <View style={styles.price}>
-                <Text>subtotal</Text>
+                <Text>{('subtotal')}</Text>
                 <Text>${totalPrice}</Text>
               </View>
               <View style={styles.price}>
-                <Text>shipping cost</Text>
+                <Text>{t('shipping cost')}</Text>
                 <Text>${shippingCost}</Text>
               </View>
               <View style={styles.price}>
-                <Text>tax</Text>
+                <Text>{t('tax')}</Text>
                 <Text>$20</Text>
               </View>
               <View style={styles.price}>
-                <Text>Total</Text>
+                <Text>{t('total')}</Text>
                 <Text>${calculateTotal()}</Text>
               </View>
             </View>
             <TouchableOpacity style={styles.UPIContainer}>
-              <Text style={styles.UPIText}>Pay with UPI</Text>
+              <Text style={styles.UPIText}>{t('Pay with UPI')}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
         <TouchableOpacity style={styles.totalBox}>
-          <Text style={styles.textTotal}>place order</Text>
+          <Text style={styles.textTotal}>{t('place order')}</Text>
           <Text style={styles.textTotal}>${calculateTotal()}</Text>
         </TouchableOpacity>
       </View>

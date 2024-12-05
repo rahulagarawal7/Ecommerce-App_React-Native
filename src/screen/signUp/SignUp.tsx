@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View, Alert} from 'react-native';
+import {ScrollView, StyleSheet, Text, View, Alert, Modal, ActivityIndicator} from 'react-native';
 import React, {useState} from 'react';
 import {colors, ms} from '../../utils';
 import {Button, InputBox} from '../../component';
@@ -6,11 +6,12 @@ import {t} from 'i18next';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
 import auth from '@react-native-firebase/auth';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
 import PasswordInputBox from '../../component/passwordInputBox/passwordInputBox';
 import {styles} from './styles';
 import {showShankBar} from '../../utils/constants';
+import { setLoading } from '../../redux/slices/loading/loadingSlice';
 
 interface SignUpProps {
   navigation: NavigationProp<RootStackParamList>;
@@ -22,25 +23,29 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-
+  const loading = useSelector(store=>store?.loading.loading)
   const handleSignUp = async () => {
     if (!email || !password || !name || !phone) {
-      Alert.alert('Error', 'Please fill all fields!');
+      Alert.alert(t('error'), t('Please fill all fields!'));
       return;
     }
     if (name.length < 3) {
-      showShankBar('Name must be more the 3 character');
+      showShankBar(t('Name must be more the 3 character'));
       return;
     }
     if (phone.length > 10 || phone.length < 10) {
-      showShankBar('Enter valid phone number');
+      showShankBar(t('Enter valid phone number'));
       return;
     }
-
+    if (password.length < 6) {
+      showShankBar(t('Enter valid password'));
+      return;
+    }
+     dispatch(setLoading(true));
     try {
       await auth().createUserWithEmailAndPassword(email, password);
       const currentUser = auth().currentUser;
-
+      dispatch(setLoading(false));
       if (currentUser) {
         await currentUser.updateProfile({
           displayName: name,
@@ -50,23 +55,38 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
         await currentUser.reload();
 
         dispatch(addUserInfo(auth().currentUser));
+        dispatch(setLoading(false));
 
-        Alert.alert('Success', 'User registered successfully!');
+        Alert.alert(t('success'), 't(user registered successfully!)');
       }
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Error during sign up:', error);
+        console.error('error during sign up:', error);
+        dispatch(setLoading(false));
         Alert.alert(t('error'), error.message);
       } else {
-        console.error('Error during sign up:', error);
-        Alert.alert(t('Error'), t('an error occurred during sign up'));
+        console.error('error during sign up:', error);
+        dispatch(setLoading(false));
+        Alert.alert(t('error'), t('an error occurred during sign up'));
       }
+    
+    }
+    finally{
+      dispatch(setLoading(false));
     }
   };
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.heading}>Sign Up</Text>
+       {loading &&  <Modal transparent={loading} animationType="fade" visible={true}>
+        <View style={styles.modalContainer}>
+          <View style={styles.loadingBox}>
+            <ActivityIndicator size="large" color="#6200EE" />
+            <Text style={styles.loadingText}>Loading...</Text>
+          </View>
+        </View>
+      </Modal>}
+      <Text style={styles.heading}>{t('sign up')}</Text>
       <View style={styles.inputBox}>
         <InputBox
           keyboardType="text"
@@ -92,7 +112,7 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
           containerStyle={styles.input}
           onChangeText={setPassword}
         />
-        <Button buttonName="Sign Up" handleSubmit={handleSignUp} />
+        <Button buttonName="sign up" handleSubmit={handleSignUp} />
       </View>
       <Text style={styles.createText}>
         {t('already have account')}?{' '}
