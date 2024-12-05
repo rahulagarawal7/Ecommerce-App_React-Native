@@ -9,6 +9,7 @@ import {RootStackParamList} from '../../navigation/types';
 import {ProductTypes} from '../../utils/types';
 import {useSelector} from 'react-redux';
 import {styles} from './styles';
+import { t } from 'i18next';
 
 interface ProductCardProps {
   product: ProductTypes;
@@ -45,10 +46,10 @@ const ProductCard: React.FC<ProductCardProps> = ({product}) => {
         'likedProducts',
         JSON.stringify(parsedLikedProducts),
       );
-      showShankBar('Added to Wishlist');
+      showShankBar(t('added to wishlist'));
     } catch (error) {
       console.error('Failed to save liked product:', error);
-      showShankBar('Failed to save liked product', 'error');
+      showShankBar(t('failed to save liked product'), 'error');
     }
   };
 
@@ -67,10 +68,10 @@ const ProductCard: React.FC<ProductCardProps> = ({product}) => {
         'likedProducts',
         JSON.stringify(updatedLikedProducts),
       );
-      showShankBar(' Remove From  Wishlist');
+      showShankBar(t('remove from wishlist'));
     } catch (error) {
       console.error('Failed to remove liked product:', error);
-      showShankBar('Failed to remove liked product', 'error');
+      showShankBar(t('failed to remove liked product'), 'error');
     }
   };
 

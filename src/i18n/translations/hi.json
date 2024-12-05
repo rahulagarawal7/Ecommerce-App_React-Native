@@ -101,5 +101,9 @@
   "laptop": "लैपटॉप",
   "tv": "टीवी",
   "mobile": "मोबाइल",
-  "gaming": "गेमिंग"
+  "gaming": "गेमिंग",
+  "for": "के लिए",
+  "added to wishlist": "विशलिस्ट में जोड़ा गया",
+  "failed to save liked product": "पसंदीदा उत्पाद को सहेजने में विफल",
+  "failed to remove liked product": "पसंदीदा उत्पाद को हटाने में विफल",
 }

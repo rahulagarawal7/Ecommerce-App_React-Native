@@ -101,5 +101,10 @@
   "laptop": "laptop",
   "tv": "tv",
   "mobile": "mobile",
-  "gaming": "gaming"
+  "gaming": "gaming",
+  "for": "For",
+  "added to wishlist": "Added to Wishlist",
+  "failed to save liked product": "Failed to save liked product",
+  "remove from  wishlist": "Remove From  Wishlist",
+  "failed to remove liked product": "Failed to remove liked product"
 }

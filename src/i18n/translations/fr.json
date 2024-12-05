@@ -101,5 +101,9 @@
   "laptop": "ordinat",
   "tv": "télévision",
   "mobile": "mobile",
-  "gaming": "jeu vidéo"
+  "gaming": "jeu vidéo",
+  "for": "pour",
+  "added to wishlist": "Ajouté à la liste de souhaits",
+  "failed to save liked product": "Échec de l'enregistrement du produit aimé",
+  "failed to remove liked product": "Échec de la suppression du produit aimé"
 }
