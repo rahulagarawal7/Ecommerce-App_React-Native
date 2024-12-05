@@ -6,6 +6,7 @@ import {RootStackParamList} from '../../navigation/types';
 import {BackArrowLogo, PaymentCardLogo} from '../../assets';
 import {Screen} from 'react-native-screens';
 import { screenNames } from '../../utils/constants';
+import { t } from 'i18next';
 
 interface CheckOutProps {
   data: string;
@@ -24,13 +25,13 @@ const CheckOut: React.FC<CheckOutProps> = ({data, title, screen ,logo = false}) 
       style={styles.container}
       onPress={() => navigation.navigate(screen, undefined)}>
       <View style={styles.box}>
-        <Text style={styles.text}>{title}</Text>
+        <Text style={styles.text}>{t(title)}</Text>
         <View style={screen===screenNames.addPayment && styles.cardLogo}>
         <Text
           style={styles.editText}
           // onPress={() => navigation.navigate(screenNames.addAddress, undefined)}
         >
-          {data}
+          {t(data)}
         </Text>
        { logo && <Image source={PaymentCardLogo} />}
         </View>

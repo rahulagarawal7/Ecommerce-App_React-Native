@@ -43,10 +43,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route, navigation}) => {
         'cartProducts',
         JSON.stringify(parsedCartProducts),
       );
-      showShankBar('product added to cart');
+      showShankBar(t('product added to cart'));
     } catch (error) {
       console.error('Failed to save Cart product:', error);
-      showShankBar('Failed to save Cart product', 'error');
+      showShankBar(t('failed to save cart product'), t('error'));
     }
   };
 
@@ -64,10 +64,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route, navigation}) => {
         'cartProducts',
         JSON.stringify(updatedCartProducts),
       );
-      showShankBar('product remove from Cart');
+      showShankBar(t('product remove from cart'));
     } catch (error) {
       console.error('Failed to remove Cart product:', error);
-      showShankBar('Failed to remove Cart product', 'error');
+      showShankBar(t('failed to remove cart product'), 'error');
     }
   };
 
@@ -139,7 +139,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route, navigation}) => {
           <Text style={styles.descText}>{description} </Text>
           <Text style={styles.textTitle}>{title}</Text>
           <Button
-            buttonName={onCart ? t('remove ') : t('add to cart')}
+            buttonName={onCart ? t('remove') : t('add to cart')}
             handleSubmit={() => handleClicked(route?.params?.data)}
           />
         </View>
