@@ -20,3 +20,4 @@ export {default as SeeAllProductList} from './seeAllProductList/SeeAllProductLis
 export {default as CategoriesHeading} from './categoriesHeading/CategoriesHeading';
 export {default as CheckOut} from './checkOutCard/CheckOutCard';
 export {default as ImageOption} from './imageOption/ImageOption';
+export {default as AnimatedSearchBar} from './animatedSearchBar//AnimatedSearchBar';

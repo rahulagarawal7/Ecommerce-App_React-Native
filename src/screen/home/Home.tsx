@@ -7,6 +7,7 @@ import {
   StatusBar,
 } from 'react-native';
 import {
+  AnimatedSearchBar,
   CategoriesCard,
   CategoriesHeading,
   Header,
@@ -67,7 +68,7 @@ const getUserImage=async()=>{
         <Header />
         <TouchableOpacity
           onPress={() => navigation.navigate(screenNames.search)}>
-          <SearchBar placeholder="search" />
+          <AnimatedSearchBar placeholder="search" />
         </TouchableOpacity>
 
         <View style={styles.box}>
