@@ -59,7 +59,6 @@ const Home: React.FC<Props> = ({navigation}) => {
     const data = await AsyncStorage.getItem('userImage');
     if (data) {
       const image = JSON.parse(data);
-      console.log('userImage--->asyn get', image);
       dispatch(addUserImage(image));
     }
   };

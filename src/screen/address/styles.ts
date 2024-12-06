@@ -13,8 +13,6 @@ export const styles = StyleSheet.create({
     btn: {
       position: 'absolute',
       bottom: 20,
-      left: 20,
-      right: 20,
     },
     empty: {
       marginTop: '30%',

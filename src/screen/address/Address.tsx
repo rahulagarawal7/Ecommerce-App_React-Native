@@ -1,11 +1,6 @@
 import {Alert, ScrollView, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {
-  AddressCard,
-  BackButton,
-  Button,
-  EmptyPage,
-} from '../../component';
+import {AddressCard, BackButton, Button, EmptyPage} from '../../component';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {EmptyAddressLogo} from '../../assets';
 import {screenNames} from '../../utils/constants';
@@ -13,7 +8,7 @@ import {RootStackParamList} from '../../navigation/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AddressType} from '../../utils/types';
 import {styles} from './styles';
-import { t } from 'i18next';
+import {t} from 'i18next';
 
 const Address = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -76,15 +71,15 @@ const Address = () => {
             <AddressCard address={address} />
           </View>
         ) : (
-          <>
-            <EmptyPage
-              title="no address found"
-              btnName="add"
-              image={EmptyAddressLogo}
-              style={styles.empty}
-            />
-          </>
+          <EmptyPage
+            title="no address found"
+            btnName="add"
+            image={EmptyAddressLogo}
+            style={styles.empty}
+            btn={false}
+          />
         )}
+
         {address ? (
           <Button
             buttonName="delete"

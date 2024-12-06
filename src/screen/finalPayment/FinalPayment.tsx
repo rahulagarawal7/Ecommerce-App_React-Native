@@ -13,7 +13,7 @@ import {BackButton, CheckOut} from '../../component';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {screenNames} from '../../utils/constants';
 import {styles} from './styles';
-import { t } from 'i18next';
+import {t} from 'i18next';
 
 interface FinalPaymentProps {
   route: RouteProp<RootStackParamList, 'finalPayment'>;
@@ -30,7 +30,6 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
     const data = await AsyncStorage.getItem('userPayment');
     if (data) {
       const payment = JSON.parse(data);
-      console.log('payment--->', payment);
       const number = mask(payment.cardNumber);
       setCardNumber(number);
     }
@@ -98,7 +97,7 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
             )}
             <View style={styles.container}>
               <View style={styles.price}>
-                <Text>{('subtotal')}</Text>
+                <Text>{'subtotal'}</Text>
                 <Text>${totalPrice}</Text>
               </View>
               <View style={styles.price}>

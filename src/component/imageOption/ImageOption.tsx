@@ -37,17 +37,15 @@ const ImageOption: React.FC<ImageOptionProp> = ({setShow, show}) => {
       height: 400,
       cropping: true,
     }).then(image => {
-      console.log('0----->', image.path);
       if (image) {
         saveUserImage(image.path);
       }
     });
   };
-  console.log('78787878');
+
   const saveUserImage = async (image: string) => {
     try {
       await AsyncStorage.setItem('userImage', JSON.stringify(image));
-      console.log('usermaage----', image);
       dispatch(addUserImage(image));
       setShow(!show);
 
