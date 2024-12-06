@@ -13,16 +13,19 @@ import {
 import React, {useState} from 'react';
 import {BackButton, Button, ImageOption, InputBox} from '../../component';
 import {colors, ms} from '../../utils';
-import {UserLogo} from '../../assets';
+import {CameraIcon, UserLogo} from '../../assets';
 import {firebase} from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
-import {addUserImage, addUserInfo} from '../../redux/slices/userSlice/userSlice';
+import {
+  addUserImage,
+  addUserInfo,
+} from '../../redux/slices/userSlice/userSlice';
 import {setLoading} from '../../redux/slices/loading/loadingSlice';
 import {LoadingState} from '../../redux/slices/types';
 import {styles} from './styles';
 import ImagePicker from 'react-native-image-crop-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { t } from 'i18next';
+import {t} from 'i18next';
 
 interface RootState {
   loading: LoadingState;
@@ -32,11 +35,11 @@ const UserProfile: React.FC = () => {
   const user = firebase.auth().currentUser;
   const dispatch = useDispatch();
   const loading = useSelector((store: RootState) => store?.loading?.loading);
-  const userImage = useSelector(store=>store?.user.userImage);
+  const userImage = useSelector(store => store?.user.userImage);
   const [email, setEmail] = useState(user?.email || '');
   const [name, setName] = useState(user?.displayName || '');
   const [phone, setPhone] = useState(user?.photoURL || '');
-  const [show,setShow]=useState(false);
+  const [show, setShow] = useState(false);
 
   const handleSubmit = async () => {
     dispatch(setLoading(true));
@@ -63,58 +66,54 @@ const UserProfile: React.FC = () => {
     }
   };
 
-
-
-
   return (
+    <TouchableWithoutFeedback onPress={() => setShow(false)}>
+      <View style={styles.outerBox}>
+        <Modal transparent={true} visible={loading} animationType="fade">
+          <View style={styles.loaderOverlay}>
+            <ActivityIndicator size="large" color={colors.tintColor} />
+          </View>
+        </Modal>
+        <ScrollView>
+          <BackButton heading={'back'} />
+          <View style={styles.container}>
+            <TouchableOpacity
+              style={styles.userImageBox}
+              onPress={() => setShow(!show)}>
+              <Image
+                source={userImage?.length > 0 ? {uri: userImage} : UserLogo}
+                style={styles.userImage}
+              />
+              <View style={styles.camera}>
+                <Image source={CameraIcon} style={styles.cameraIcon} />
+              </View>
+            </TouchableOpacity>
 
-    <TouchableWithoutFeedback onPress={()=>setShow(false)} >
-<View style={styles.outerBox}>
+            <InputBox
+              placeholder="name"
+              value={name}
+              onChangeText={setName}
+              keyboardType="text"
+            />
+            <InputBox
+              placeholder="phone"
+              value={phone}
+              onChangeText={setPhone}
+              keyboardType="number"
+            />
 
+            <InputBox
+              keyboardType="text"
+              placeholder="email"
+              value={email}
+              onChangeText={setEmail}
+              editable={false}
+            />
 
-    
-          <Modal transparent={true} visible={loading} animationType="fade">
-        <View style={styles.loaderOverlay}>
-          <ActivityIndicator size="large" color={colors.tintColor} />
-          <Text style={styles.loaderText}>{t('updating profile...')}</Text>
-        </View>
-      </Modal>
-      <ScrollView>
-        <BackButton heading={'back'} />
-        <View style={styles.container}>
-          <TouchableOpacity style={styles.userImageBox} 
-          onPress={()=>setShow(!show)}
-          >
-        <Image source={userImage?.length>0 ? {uri:userImage} : UserLogo} style={styles.userImage} />
-       
-          </TouchableOpacity>
-
-          <InputBox
-            placeholder="name"
-            value={name}
-            onChangeText={setName}
-            keyboardType="text"
-          />
-          <InputBox
-            placeholder="phone"
-            value={phone}
-            onChangeText={setPhone}
-            keyboardType="number"
-          />
-
-          <InputBox
-            keyboardType="text"
-            placeholder="email"
-            value={email}
-            onChangeText={setEmail}
-            editable={false}
-          />
-
-          <Button buttonName={t('update')} handleSubmit={handleSubmit} />
-        </View>
-      </ScrollView>
-      {show && <ImageOption setShow={setShow} show={show}/>}
-
+            <Button buttonName={t('update')} handleSubmit={handleSubmit} />
+          </View>
+        </ScrollView>
+        {show && <ImageOption setShow={setShow} show={show} />}
       </View>
     </TouchableWithoutFeedback>
   );

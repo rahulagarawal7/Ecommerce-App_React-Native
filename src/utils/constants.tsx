@@ -88,7 +88,7 @@ export const profileButtonNames = [
   {id: 2, name: 'wishlist', screenName: screenNames.wishlist},
   {id: 3, name: 'payment', screenName: screenNames.payment},
   {id: 4, name: 'language', screenName: screenNames.language},
- // {id:5,  name:'explore store' , screenName:screenNames.explore},
+  {id:5,  name:'explore store' , screenName:screenNames.explore},
   {id: 6, name: 'help', screenName: screenNames.help},
   {id: 7, name: 'support', screenName: screenNames.support},
 ];

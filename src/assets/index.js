@@ -34,3 +34,4 @@ export {default as AppleLogo} from './logo/Apple.png';
 export {default as NightIcon} from './icons/night.png';
 export {default as DayIcon} from './icons/brightness.png';
 export {default as PopularBanner} from './images/popularBanner.png';
+export {default as CameraIcon} from './icons/camera.png';

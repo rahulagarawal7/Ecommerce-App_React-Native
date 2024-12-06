@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { ms } from "../../utils";
 
 export const styles = StyleSheet.create({
     container: {
@@ -13,7 +14,7 @@ export const styles = StyleSheet.create({
       gap: 10,
     },
     hederBox: {
-      gap: 30,
+      gap: ms(20),
     },
   });
   

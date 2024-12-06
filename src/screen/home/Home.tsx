@@ -22,7 +22,10 @@ import {useAppSelector} from '../../redux/store/store';
 import {ProductTypes} from '../../utils/types';
 import {firebase} from '@react-native-firebase/auth';
 import {useDispatch, useSelector} from 'react-redux';
-import {addUserImage, addUserInfo} from '../../redux/slices/userSlice/userSlice';
+import {
+  addUserImage,
+  addUserInfo,
+} from '../../redux/slices/userSlice/userSlice';
 import {styles} from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -38,7 +41,6 @@ const Home: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch();
   const userInfo = useSelector(store => store?.user?.userInfo);
 
-
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -50,16 +52,17 @@ const Home: React.FC<Props> = ({navigation}) => {
   }, [data, userInfo]);
 
   useEffect(() => {
-    getUserImage()
+    getUserImage();
   }, []);
 
-const getUserImage=async()=>{
-  const data = await AsyncStorage.getItem('userImage')
-  if(data){
-    const image=JSON.parse(data);
-    dispatch(addUserImage(image));
-  }
-}
+  const getUserImage = async () => {
+    const data = await AsyncStorage.getItem('userImage');
+    if (data) {
+      const image = JSON.parse(data);
+      console.log('userImage--->asyn get', image);
+      dispatch(addUserImage(image));
+    }
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -82,15 +85,6 @@ const getUserImage=async()=>{
         <View style={styles.hederBox}>
           <HeadingText
             primaryText="top selling"
-            secondaryText="see all"
-            screenName={screenNames.categoryList}
-            seeAllList={products}
-          />
-          <ProductCardList productList={products} />
-        </View>
-        <View style={styles.hederBox}>
-          <HeadingText
-            primaryText="new in"
             secondaryText="see all"
             screenName={screenNames.categoryList}
             seeAllList={products}
