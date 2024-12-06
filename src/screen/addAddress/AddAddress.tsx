@@ -14,7 +14,7 @@ import {screenNames, showShankBar} from '../../utils/constants';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
 import {styles} from './styles';
-import { t } from 'i18next';
+import {t} from 'i18next';
 
 interface AddAddressProps {
   navigation: NavigationProp<RootStackParamList, 'Profile'>;

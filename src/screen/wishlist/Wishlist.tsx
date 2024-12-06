@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   FlatList,
@@ -11,7 +10,6 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {BackButton, EmptyPage} from '../../component';
 import {CartEmptyLogo} from '../../assets';
-import {colors, ms} from '../../utils';
 import {t} from 'i18next';
 import {ProductTypes} from '../../utils/types';
 import {useDispatch} from 'react-redux';

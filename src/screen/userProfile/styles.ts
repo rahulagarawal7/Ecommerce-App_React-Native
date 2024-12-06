@@ -46,4 +46,20 @@ const styles = StyleSheet.create({
     color: colors.textColor,
     fontSize: ms(18),
   },
+  camera:{
+    height:ms(30),
+    width:ms(30),
+    borderRadius:30,
+    position:'absolute', 
+    backgroundColor:colors.tintColor,
+    justifyContent:"center",
+    alignItems:"center",
+     top:ms(85),
+     left:ms(37)
+  },
+  cameraIcon:{
+    tintColor:colors.primaryBgColor,
+    height:ms(20),
+    width:ms(20),
+  }
 });
