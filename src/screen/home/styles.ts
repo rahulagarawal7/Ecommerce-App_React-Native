@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { ms } from "../../utils";
+import { colors, ms } from "../../utils";
 
 export const styles = StyleSheet.create({
     container: {
@@ -15,6 +15,20 @@ export const styles = StyleSheet.create({
     },
     hederBox: {
       gap: ms(20),
-    },
+  },
+  emptyContainer: {
+    opacity:.2,
+    height: ms(280),
+    width: ms(159),
+    borderRadius: 10,
+    backgroundColor: colors.secondaryBgColor,
+    marginHorizontal: 10,
+    borderWidth: 0.4,
+    borderColor: colors.textColor,
+    margin: 5,
+  },
+  emptyBox: {
+    flexDirection:"row"
+  }
   });
   

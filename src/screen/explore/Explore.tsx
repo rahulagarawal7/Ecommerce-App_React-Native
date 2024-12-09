@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   FlatList,
   PermissionsAndroid,
   Platform,
-  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -13,26 +12,48 @@ import {
 } from 'react-native';
 import {BackButton} from '../../component';
 import {colors, ms} from '../../utils';
-import MapView from 'react-native-maps';
+import MapView, {Circle, Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
-
-const cityIInfoList = [
-  {id: 1, name: 'Indore', longitude: '73.567890', latitude: '22.123456'},
-  {id: 2, name: 'Bhopal', longitude: '-77.123456', latitude: '23.456789'},
-  {id: 3, name: 'Raipur', longitude: '81.987654', latitude: '-21.234567'},
-  {id: 4, name: 'Delhi', longitude: '77.123456', latitude: '28.704060'},
-  {id: 5, name: 'Mumbai', longitude: '72.877656', latitude: '19.076090'},
-  {id: 6, name: 'Kolkata', longitude: '88.363895', latitude: '22.572646'},
-  {id: 7, name: 'Chennai', longitude: '80.270718', latitude: '13.082680'},
-  {id: 8, name: 'Bangalore', longitude: '77.594566', latitude: '12.971599'},
-  {id: 9, name: 'Hyderabad', longitude: '78.486671', latitude: '17.385044'},
-];
+import {cityInfoList, rangeList, storeList} from '../../utils/constants';
 
 const Explore = () => {
+  const [location, setLocation] = useState();
+  const [cityId, setCityId] = useState(null);
+  const [rangeId, setRangeId] = useState(null);
+  const [region, setRegion] = useState({
+    latitude: 21.7679,
+    longitude: 78.8718,
+    latitudeDelta: 10.0,
+    longitudeDelta: 10.0,
+  });
+
   const getUserCurrentLocation = () => {
-    Geolocation.getCurrentPosition(positon => {
-      console.log('aaaaa', positon);
+    Geolocation.getCurrentPosition(position => {
+      console.log('aaaaa', position);
+      setLocation({
+        latitude: position.coords.altitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: 0.18,
+        longitudeDelta: 0.18,
+      });
     });
+  };
+  const handleRageSelected = (index: number) => {
+    setRangeId(index);
+  };
+  const handleCitySelected = id => {
+    const selectedCity = cityInfoList.find(city => city.id === id);
+    setCityId(id);
+    //  setRangeId(null); // Reset range when city is selected
+    if (selectedCity) {
+      // Focus on the selected city
+      setRegion({
+        latitude: selectedCity.latitude,
+        longitude: selectedCity.longitude,
+        latitudeDelta: 0.18, // Adjust to zoom level
+        longitudeDelta: 0.18, // Adjust to zoom level
+      });
+    }
   };
 
   const requestPermission = async () => {
@@ -55,8 +76,11 @@ const Explore = () => {
       }
     } else {
       console.log('ios--', Platform.OS);
+      getUserCurrentLocation();
     }
   };
+  const city = cityInfoList.find(item => item.id === cityId);
+  const range = rangeList.find(item => item.id === rangeId);
   useEffect(() => {
     requestPermission();
   }, []);
@@ -71,27 +95,96 @@ const Explore = () => {
         <FlatList
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{gap: 10}}
-          data={cityIInfoList}
+          data={cityInfoList}
           horizontal
           renderItem={({item}) => {
             return (
-              <TouchableOpacity style={styles.cityBox}>
-                <Text style={styles.textCity}>{item.name}</Text>
+              <TouchableOpacity
+                style={[
+                  styles.cityBox,
+                  item.id === cityId && styles.selectedCity,
+                ]}
+                onPress={() => handleCitySelected(item.id)}>
+                <Text
+                  style={[
+                    styles.textCity,
+                    item.id === cityId && styles.selectedCityText,
+                  ]}>
+                  {item.name}
+                </Text>
               </TouchableOpacity>
             );
           }}
         />
       </View>
+      <View style={styles.cityRangeBox}>
+        {cityId && (
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{gap: 10}}
+            data={rangeList}
+            horizontal
+            renderItem={({item}) => {
+              return (
+                <TouchableOpacity
+                  style={[
+                    styles.rangeBox,
+                    item.id === rangeId && styles.selectedCity,
+                  ]}
+                  onPress={() => handleRageSelected(item.id)}>
+                  <Text
+                    style={[
+                      styles.textCity,
+                      item.id === rangeId && styles.selectedCityText,
+                    ]}>
+                    {item.range}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        )}
+      </View>
 
       <MapView
+        region={region}
         style={styles.mapStyle}
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitude: 21.7679,
+          longitude: 78.8718,
+          latitudeDelta: 10.0,
+          longitudeDelta: 10.0,
         }}
-      />
+        showsUserLocation={true}>
+        {cityId &&
+          storeList[cityId].map(store => {
+            return (
+              <Marker
+                key={store.id}
+                coordinate={{
+                  latitude: store.latitude,
+                  longitude: store.longitude,
+                  latitudeDelta: 10.0,
+                  longitudeDelta: 10.0,
+                }}
+                title={store.name}
+                description={store.name}
+              />
+            );
+          })}
+        {cityId && city && rangeId && range && (
+          <Circle
+            center={{
+              latitude: city.latitude,
+              longitude: city.longitude,
+            }}
+            radius={range.rangeMeter || 20000}
+            strokeWidth={2}
+            strokeColor="rgba(0,0,0,0.5)"
+            fillColor="rgba(0,0,0,0.1)"
+          />
+        )}
+      </MapView>
     </View>
   );
 };
@@ -113,14 +206,27 @@ const styles = StyleSheet.create({
     paddingVertical: ms(10),
     zIndex: 1,
     flexDirection: 'row',
+    // backgroundColor: 'red',
+    width: ms(53),
   },
   cityNameBox: {
     position: 'absolute',
     zIndex: 1,
     marginHorizontal: ms(60),
     marginVertical: ms(10),
+    width: ms(260),
+    height: ms(40),
+
+    // backgroundColor: 'green',
+  },
+  cityRangeBox: {
+    position: 'absolute',
+    zIndex: 1,
+    marginHorizontal: ms(40),
+    marginVertical: ms(50),
     width: ms(290),
     height: ms(40),
+    // backgroundColor: 'red',
   },
   cityBox: {
     backgroundColor: colors.cardBgColor,
@@ -130,9 +236,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: ms(10),
     borderRadius: ms(20),
   },
+  rangeBox: {
+    backgroundColor: colors.cardBgColor,
+    alignSelf: 'center',
+    height: ms(20),
+    justifyContent: 'center',
+    paddingHorizontal: ms(10),
+    borderRadius: ms(20),
+  },
   textCity: {
     color: colors.textColor,
     fontSize: ms(12),
     fontWeight: '400',
+  },
+  selectedCity: {
+    backgroundColor: colors.tintColor,
+  },
+  selectedCityText: {
+    color: colors.primaryBgColor,
   },
 });

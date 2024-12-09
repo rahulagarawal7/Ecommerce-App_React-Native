@@ -71,3 +71,21 @@ export interface ProductTypes{
         
 
       }
+
+
+    export  interface CityInfoListType {
+        id: number;
+      name: string;
+      latitude: number,
+      longitude:number
+      }
+   export   interface StoreType {
+        id: number;
+        name: string;
+        latitude: number;
+        longitude: number;
+      }
+      
+   export   interface StoreListType {
+        [cityId: number]: StoreType[];
+      }
