@@ -34,7 +34,8 @@
     "react-native-screens": "^3.35.0",
     "react-native-select-dropdown": "^4.0.1",
     "react-native-snackbar": "^2.8.0",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

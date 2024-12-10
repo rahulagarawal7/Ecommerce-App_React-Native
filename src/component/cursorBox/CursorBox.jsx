@@ -1,8 +1,9 @@
 import {
-  Animated,
+ 
   Dimensions,
   FlatList,
   Image,
+
   StyleSheet,
   Text,
   View,
@@ -45,6 +46,7 @@ const CursorBox = () => {
         keyExtractor={(_, index) => index.toString()}
       />
       <View style={styles.dotContainer}>
+        
         {carouselData.map((_, index) => (
           <View
             key={index}
@@ -54,6 +56,8 @@ const CursorBox = () => {
             ]}
           />
         ))}
+       
+       
       </View>
     </View>
   );
@@ -76,6 +80,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: ms(20),
     gap: 5,
+    width: 30,
+    alignSelf: 'center'
+    
   },
   activeDot: {
     backgroundColor: colors.tintColor,
