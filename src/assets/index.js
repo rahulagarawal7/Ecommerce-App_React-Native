@@ -35,3 +35,8 @@ export {default as NightIcon} from './icons/night.png';
 export {default as DayIcon} from './icons/brightness.png';
 export {default as PopularBanner} from './images/popularBanner.png';
 export {default as CameraIcon} from './icons/camera.png';
+export {default as Carousel1} from './carousel/carousel1.png';
+export {default as Carousel2} from './carousel/carousel2.png';
+export {default as Carousel3} from './carousel/carousel3.png';
+export {default as Carousel4} from './carousel/carousel4.png';
+export {default as Carousel5} from './carousel/carousel5.png';

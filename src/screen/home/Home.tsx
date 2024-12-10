@@ -10,6 +10,7 @@ import {
   AnimatedSearchBar,
   CategoriesCard,
   CategoriesHeading,
+  CursorBox,
   Header,
   HeadingText,
   ProductCardList,
@@ -74,6 +75,7 @@ const Home: React.FC<Props> = ({navigation}) => {
         </TouchableOpacity>
 
         <View style={styles.box}>
+          <CursorBox />
           <CategoriesHeading
             primaryText="categories"
             secondaryText="see all"
@@ -88,7 +90,14 @@ const Home: React.FC<Props> = ({navigation}) => {
             screenName={screenNames.categoryList}
             seeAllList={products}
           />
-          <ProductCardList productList={products} />
+          {products.length > 0 ? (
+            <ProductCardList productList={products} />
+          ) : (
+            <View style={styles.emptyBox}>
+              <View style={styles.emptyContainer} />
+              <View style={styles.emptyContainer} />
+            </View>
+          )}
         </View>
       </View>
     </ScrollView>
