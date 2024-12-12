@@ -63,7 +63,9 @@ const Address = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton heading="back" />
+      <View style={styles.backBox}>
+        <BackButton heading="back" />
+      </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {address ? (

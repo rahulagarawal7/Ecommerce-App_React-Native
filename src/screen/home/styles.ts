@@ -21,14 +21,16 @@ export const styles = StyleSheet.create({
     height: ms(280),
     width: ms(159),
     borderRadius: 10,
-    backgroundColor: colors.secondaryBgColor,
+    backgroundColor: colors.loadingBgColor,
     marginHorizontal: 10,
     borderWidth: 0.4,
     borderColor: colors.textColor,
     margin: 5,
+    justifyContent:"center"
   },
   emptyBox: {
-    flexDirection:"row"
+    flexDirection:"row",
+  
   }
   });
   

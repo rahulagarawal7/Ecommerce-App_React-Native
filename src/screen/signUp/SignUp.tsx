@@ -1,6 +1,12 @@
-import {ScrollView, StyleSheet, Text, View, Alert, Modal, ActivityIndicator} from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Alert,
+  Modal,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useState} from 'react';
-import {colors, ms} from '../../utils';
 import {Button, InputBox} from '../../component';
 import {t} from 'i18next';
 import {NavigationProp} from '@react-navigation/native';
@@ -11,7 +17,12 @@ import {addUserInfo} from '../../redux/slices/userSlice/userSlice';
 import PasswordInputBox from '../../component/passwordInputBox/passwordInputBox';
 import {styles} from './styles';
 import {showShankBar} from '../../utils/constants';
-import { setLoading } from '../../redux/slices/loading/loadingSlice';
+import {setLoading} from '../../redux/slices/loading/loadingSlice';
+import {LoadingState} from '../../redux/slices/types';
+
+interface loadingRootState {
+  loading: LoadingState;
+}
 
 interface SignUpProps {
   navigation: NavigationProp<RootStackParamList>;
@@ -23,7 +34,9 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const loading = useSelector(store=>store?.loading.loading)
+  const loading = useSelector(
+    (store: loadingRootState) => store?.loading.loading,
+  );
   const handleSignUp = async () => {
     if (!email || !password || !name || !phone) {
       Alert.alert(t('error'), t('Please fill all fields!'));
@@ -41,7 +54,7 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
       showShankBar(t('Enter valid password'));
       return;
     }
-     dispatch(setLoading(true));
+    dispatch(setLoading(true));
     try {
       await auth().createUserWithEmailAndPassword(email, password);
       const currentUser = auth().currentUser;
@@ -57,7 +70,7 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
         dispatch(addUserInfo(auth().currentUser));
         dispatch(setLoading(false));
 
-        Alert.alert(t('success'), 't(user registered successfully!)');
+        Alert.alert(t('success'), t('user registered successfully!'));
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -69,23 +82,23 @@ const SignUp: React.FC<SignUpProps> = ({navigation}) => {
         dispatch(setLoading(false));
         Alert.alert(t('error'), t('an error occurred during sign up'));
       }
-    
-    }
-    finally{
+    } finally {
       dispatch(setLoading(false));
     }
   };
 
   return (
     <ScrollView style={styles.container}>
-       {loading &&  <Modal transparent={loading} animationType="fade" visible={true}>
-        <View style={styles.modalContainer}>
-          <View style={styles.loadingBox}>
-            <ActivityIndicator size="large" color="#6200EE" />
-            <Text style={styles.loadingText}>Loading...</Text>
+      {loading && (
+        <Modal transparent={loading} animationType="fade" visible={true}>
+          <View style={styles.modalContainer}>
+            <View style={styles.loadingBox}>
+              <ActivityIndicator size="large" color="#6200EE" />
+              <Text style={styles.loadingText}>Loading...</Text>
+            </View>
           </View>
-        </View>
-      </Modal>}
+        </Modal>
+      )}
       <Text style={styles.heading}>{t('sign up')}</Text>
       <View style={styles.inputBox}>
         <InputBox

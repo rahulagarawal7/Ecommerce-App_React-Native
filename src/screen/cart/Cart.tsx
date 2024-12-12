@@ -1,16 +1,16 @@
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   Image,
   Alert,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BackButton, EmptyPage} from '../../component';
 import {CartEmptyLogo} from '../../assets';
-import {colors, ms} from '../../utils';
+import {colors} from '../../utils';
 import {screenNames} from '../../utils/constants';
 import {ProductTypes} from '../../utils/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -30,11 +30,12 @@ interface CartProps {
 
 const Cart: React.FC<CartProps> = ({navigation}) => {
   const [cartProducts, setCartProducts] = useState<ProductTypes[]>([]);
-
+  const [loading, setLoading] = useState(true);
   const getPayment = () => {
     const totalPrice = calculateTotal();
-    if (totalPrice)
-      {navigation.navigate(screenNames.finalPayment, {price: totalPrice});}
+    if (totalPrice) {
+      navigation.navigate(screenNames.finalPayment, {price: totalPrice});
+    }
   };
 
   const loadCartProducts = async () => {
@@ -105,14 +106,23 @@ const Cart: React.FC<CartProps> = ({navigation}) => {
 
   const calculateTotal = () => {
     return cartProducts.reduce(
-      (total, product) => total + product.price * product.quantity,
+      (total, product) => total + product?.price * product.quantity,
       0,
     );
   };
 
   const renderProductItem = ({item}: {item: ProductTypes}) => (
     <View style={styles.box}>
-      <Image source={{uri: item.image}} style={styles.productImage} />
+      {loading && (
+        <View style={styles.loadingBox}>
+          <ActivityIndicator size="large" color={colors.tintColor} />
+        </View>
+      )}
+      <Image
+        onLoad={() => setLoading(false)}
+        source={{uri: item.image}}
+        style={styles.productImage}
+      />
       <View style={styles.productInfo}>
         <Text style={styles.brand}>{item?.brand}</Text>
         <Text style={styles.price}>

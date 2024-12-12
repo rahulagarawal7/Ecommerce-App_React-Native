@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
       backgroundColor: colors.secondaryBgColor,
       borderRadius: 10,
       marginTop: '5%',
-      gap: ms(20),
-      justifyContent: 'center',
+      gap: ms(16),
+      justifyContent: 'center',      
     },
     price: {
       flexDirection: 'row',
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
       justifyContent: 'space-between',
       alignItems: 'center',
       paddingHorizontal: 15,
-      marginBottom: ms(50),
+      marginBottom: ms(60),
     },
     textTotal: {
       fontSize: ms(20),
@@ -63,5 +63,18 @@ export const styles = StyleSheet.create({
       height: '100%',
       justifyContent: 'space-between',
     },
+    textHeading:{
+      color:colors.textColor,
+      fontSize:ms(16),
+      fontWeight:'600'
+    },
+    text:{
+      color:colors.textColor,
+      fontSize:ms(14),
+      fontWeight:'400'
+    },
+    backBox:{
+      marginTop:ms(10)
+    }
   });
   

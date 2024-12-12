@@ -28,4 +28,7 @@ export const styles = StyleSheet.create({
       borderColor: colors.selectedBorderColor,
       borderWidth: 2,
     },
+    backBox:{
+      marginTop:ms(10)
+    }
   });

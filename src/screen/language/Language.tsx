@@ -59,7 +59,10 @@ const Language: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <BackButton heading={t('back')} />
+      <View style={styles.backBox}>
+        <BackButton heading={t('back')} />
+      </View>
+
       <View style={styles.box}>
         {languages.map(lang => (
           <TouchableOpacity

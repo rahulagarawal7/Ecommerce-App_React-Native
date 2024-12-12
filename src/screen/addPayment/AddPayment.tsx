@@ -1,13 +1,12 @@
-import {StyleSheet, Text, View, Alert} from 'react-native';
+import {Text, View, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BackButton, Button, InputBox} from '../../component';
-import {colors, ms} from '../../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {screenNames, showShankBar} from '../../utils/constants';
 import {NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
 import {styles} from './styles';
-import { t } from 'i18next';
+import {t} from 'i18next';
 
 interface AddPaymentProps {
   navigation: NavigationProp<RootStackParamList, 'Profile'>;
@@ -125,7 +124,7 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <BackButton heading="Back" />
+      <BackButton heading={'back'} />
 
       <InputBox
         placeholder="Card Number"
@@ -156,7 +155,8 @@ const AddPayment: React.FC<AddPaymentProps> = ({navigation}) => {
               setCcv(text);
               if (/^\d{0,3}$/.test(text))
                 setErrors(prev => ({...prev, ccv: ''}));
-              else setErrors(prev => ({...prev, ccv: t('CCV must be 3 digits.')}));
+              else
+                setErrors(prev => ({...prev, ccv: t('CCV must be 3 digits.')}));
             }}
             keyboardType="numeric"
           />

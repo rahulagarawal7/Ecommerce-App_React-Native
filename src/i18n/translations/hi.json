@@ -125,5 +125,10 @@
   "Please fill all fields!": "कृपया सभी फ़ील्ड भरें!",
   "Name must be more the 3 character": "नाम 3 अक्षरों से अधिक का होना चाहिए",
   "Enter valid phone number": "मान्य फोन नंबर दर्ज करें",
-  "Enter valid password": "मान्य पासवर्ड दर्ज करें"
+  "Enter valid password": "मान्य पासवर्ड दर्ज करें",
+  "no results found": "कोई परिणाम नहीं मिला",
+  "search by brand": "ब्रांड द्वारा खोजें",
+  "please enter your card details and address.": "कृपया अपने कार्ड विवरण और पता दर्ज करें।",
+  "please enter your card details.": "कृपया अपने कार्ड विवरण दर्ज करें।",
+  "please enter your address.": "कृपया अपना पता दर्ज करें।"
 }

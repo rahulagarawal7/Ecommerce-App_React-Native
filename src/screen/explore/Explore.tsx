@@ -168,7 +168,7 @@ const Explore = () => {
                   longitudeDelta: 10.0,
                 }}
                 title={store.name}
-                description={store.name}
+                description={store.description}
               />
             );
           })}

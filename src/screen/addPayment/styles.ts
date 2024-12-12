@@ -21,5 +21,6 @@ export const styles = StyleSheet.create({
       fontSize: ms(12),
       marginTop: ms(4),
     },
+
   });
   

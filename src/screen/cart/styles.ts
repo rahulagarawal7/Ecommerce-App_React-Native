@@ -73,6 +73,16 @@ export const styles = StyleSheet.create({
       fontSize: 30,
       marginRight: 10,
       color: colors.primaryBgColor,
+    }, loadingBox: {
+      height: ms(160),
+      width: ms(125),
+      backgroundColor: colors.loadingBgColor,
+      opacity:.3,
+      position: 'absolute',
+      zIndex: 1,
+      justifyContent: 'center',
+      alignSelf:"center",
+      marginLeft:ms(10)
     },
     quantityContainer: {
       backgroundColor: colors.tintColor,

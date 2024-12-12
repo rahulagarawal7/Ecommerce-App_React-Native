@@ -28,5 +28,6 @@ export const styles = StyleSheet.create({
       color: colors.textColor,
       fontSize: ms(18),
     },
+
   });
   

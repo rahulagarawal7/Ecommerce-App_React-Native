@@ -9,12 +9,21 @@ export const styles = StyleSheet.create({
       gap: 15,
     },
     box: {
-      marginTop: ms(20),
+      marginTop: ms(5),
     },
     headingText: {
-      fontSize: ms(18),
+      fontSize: ms(24),
       fontWeight: '500',
-      padding: ms(15),
+      width: ms(342),
+      color:colors.textColor,
+      alignSelf:"center",
+      marginVertical:ms(10)
     },
+    noResultsText:{
+      alignSelf:"center",
+      color:colors.textColor,
+      fontSize:ms(22),
+      marginTop:ms(20)
+    }
   });
   

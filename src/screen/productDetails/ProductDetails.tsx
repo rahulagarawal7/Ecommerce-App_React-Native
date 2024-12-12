@@ -15,7 +15,8 @@ import {ProductTypes} from '../../utils/types';
 import {screenNames, showShankBar} from '../../utils/constants';
 import {CartLogo} from '../../assets';
 import {styles} from './styles';
-import { t } from 'i18next';
+import {t} from 'i18next';
+import {ms} from '../../utils';
 
 interface ProductDetailsProps {
   route: RouteProp<RootStackParamList, 'productDetails'>;
@@ -123,16 +124,19 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({route, navigation}) => {
   }, [cartProducts]);
   return (
     <View style={styles.container}>
-      <BackButton heading="back" />
+      <View style={styles.backBox}>
+        <BackButton heading="back" />
+      </View>
 
+      <TouchableOpacity
+        style={styles.cartBox}
+        onPress={() => {
+          navigation.navigate(screenNames.cart, undefined);
+        }}>
+        <Image style={styles.cartLogo} source={CartLogo} />
+      </TouchableOpacity>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.box}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(screenNames.cart, undefined);
-            }}>
-            <Image style={styles.cartLogo} source={CartLogo} />
-          </TouchableOpacity>
           <Image source={{uri: image}} style={styles.imageStyle} />
           <Text style={styles.text}>{brand}</Text>
           <Text style={styles.text}>Price - ${price}</Text>

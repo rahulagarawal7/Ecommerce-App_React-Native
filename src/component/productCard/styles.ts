@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
       backgroundColor: colors.cardBgColor,
       objectFit: 'contain',
       marginTop: 8,
+      
     },
     container: {
       height: ms(281),
@@ -43,6 +44,15 @@ export const styles = StyleSheet.create({
       position: 'absolute',
       alignSelf: 'flex-end',
       padding: 15,
+    },
+    loadingBox: {
+      marginTop:ms(35),
+      height: ms(170),
+      width: ms(156),
+      position: 'absolute',
+      zIndex: 1,
+      justifyContent: 'center',
+      alignSelf:"center"
     },
   });
   

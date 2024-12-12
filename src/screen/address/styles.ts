@@ -20,5 +20,8 @@ export const styles = StyleSheet.create({
     addressCard: {
       marginTop: ms(20),
     },
+    backBox:{
+      marginTop:ms(10)
+    }
   });
   

@@ -21,5 +21,8 @@ export const styles = StyleSheet.create({
     paymentCard: {
       marginTop: ms(20),
     },
+    backBox:{
+      marginTop:ms(10)
+    }
   });
   

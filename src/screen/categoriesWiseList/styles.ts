@@ -6,7 +6,11 @@ export const styles = StyleSheet.create({
       color: colors.textColor,
       fontWeight: '600',
       fontSize: ms(20),
-      padding: 15,
+      marginTop:ms(15),
+      marginBottom:ms(5),
+      width:ms(340),
+      marginLeft:ms(5),
+      alignSelf:"center"
     },
     container: {
       height: '100%',
@@ -24,5 +28,8 @@ export const styles = StyleSheet.create({
       color: colors.textColor,
       fontSize: ms(18),
     },
+    backBox:{
+      marginTop:ms(10)
+    }
   });
   

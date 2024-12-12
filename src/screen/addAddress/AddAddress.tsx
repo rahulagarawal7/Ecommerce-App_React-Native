@@ -1,14 +1,6 @@
-import {
-  ActivityIndicator,
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Alert, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BackButton, Button, InputBox} from '../../component';
-import {colors, ms} from '../../utils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {screenNames, showShankBar} from '../../utils/constants';
 import {NavigationProp} from '@react-navigation/native';

@@ -3,10 +3,11 @@ import { ms } from "../../utils";
 
 export const styles = StyleSheet.create({
     container: {
-      marginHorizontal: ms(20),
+       width:ms(352),
       flexDirection: 'row',
       marginTop:ms(10),
       justifyContent: 'space-between',
+      alignSelf:"center"
     },
     profileImage: {
       height: ms(40),

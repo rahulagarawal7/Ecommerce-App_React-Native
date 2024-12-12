@@ -1,4 +1,5 @@
 import {
+  Alert,
   ScrollView,
   StyleSheet,
   Text,
@@ -25,7 +26,28 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
   const [address, setAddress] = useState<string>('');
   const [cardNumber, setCardNumber] = useState<string>('');
   const [shippingCost, setShippingCost] = useState<number>(0);
+  const payFromUPI = () => {
+    if (address === '') {
+      Alert.alert(t('error'), t('please enter your address.'));
+      return;
+    }
+  };
+  const handlePressPay = () => {
+    if (cardNumber === '' && address === '') {
+      Alert.alert(t('error'), t('please enter your card details and address.'));
+      return;
+    }
 
+    if (cardNumber === '') {
+      Alert.alert(t('error'), t('please enter your card details.'));
+      return;
+    }
+
+    if (address === '') {
+      Alert.alert(t('error'), t('please enter your address.'));
+      return;
+    }
+  };
   const getPayment = async () => {
     const data = await AsyncStorage.getItem('userPayment');
     if (data) {
@@ -64,7 +86,10 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
   };
   return (
     <View style={styles.mainBox}>
-      <BackButton heading="back" />
+      <View style={styles.backBox}>
+        <BackButton heading="back" />
+      </View>
+
       <View style={styles.scrollBox}>
         <ScrollView style={{marginTop: 10}}>
           <View style={styles.firstBox}>
@@ -97,28 +122,28 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
             )}
             <View style={styles.container}>
               <View style={styles.price}>
-                <Text>{'subtotal'}</Text>
-                <Text>${totalPrice}</Text>
+                <Text style={styles.textHeading}>{t('subtotal')}</Text>
+                <Text style={styles.text}>${totalPrice}</Text>
               </View>
               <View style={styles.price}>
-                <Text>{t('shipping cost')}</Text>
-                <Text>${shippingCost}</Text>
+                <Text style={styles.textHeading}>{t('shipping cost')}</Text>
+                <Text style={styles.text}>${shippingCost}</Text>
               </View>
               <View style={styles.price}>
-                <Text>{t('tax')}</Text>
-                <Text>$20</Text>
+                <Text style={styles.textHeading}>{t('tax')}</Text>
+                <Text style={styles.text}>$20</Text>
               </View>
               <View style={styles.price}>
-                <Text>{t('total')}</Text>
-                <Text>${calculateTotal()}</Text>
+                <Text style={styles.textHeading}>{t('total')}</Text>
+                <Text style={styles.text}>${calculateTotal()}</Text>
               </View>
             </View>
-            <TouchableOpacity style={styles.UPIContainer}>
+            <TouchableOpacity style={styles.UPIContainer} onPress={payFromUPI}>
               <Text style={styles.UPIText}>{t('Pay with UPI')}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
-        <TouchableOpacity style={styles.totalBox}>
+        <TouchableOpacity style={styles.totalBox} onPress={handlePressPay}>
           <Text style={styles.textTotal}>{t('place order')}</Text>
           <Text style={styles.textTotal}>${calculateTotal()}</Text>
         </TouchableOpacity>

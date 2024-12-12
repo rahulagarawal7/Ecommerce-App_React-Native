@@ -22,3 +22,4 @@ export {default as CheckOut} from './checkOutCard/CheckOutCard';
 export {default as ImageOption} from './imageOption/ImageOption';
 export {default as AnimatedSearchBar} from './animatedSearchBar//AnimatedSearchBar';
 export {default as CursorBox} from './cursorBox/CursorBox';
+export {default as SearchProductCard} from './searchProductCard/SearchProductCard';

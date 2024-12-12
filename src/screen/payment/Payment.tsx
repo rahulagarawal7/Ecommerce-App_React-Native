@@ -15,7 +15,7 @@ import {screenNames} from '../../utils/constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PaymentType} from '../../utils/types';
 import {styles} from './styles';
-import { t } from 'i18next';
+import {t} from 'i18next';
 
 const Payment = () => {
   const [cardNumber, setCardNumber] = useState<number>(0);
@@ -70,7 +70,9 @@ const Payment = () => {
   }, [payments]);
   return (
     <View style={styles.container}>
-      <BackButton heading="back" />
+      <View style={styles.backBox}>
+        <BackButton heading="back" />
+      </View>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         {payments ? (
           <View style={styles.paymentCard}>
@@ -88,7 +90,11 @@ const Payment = () => {
         )}
       </ScrollView>
       {!payments ? (
-        <Button buttonName={t('add')} handleSubmit={addAddress} style={styles.btn} />
+        <Button
+          buttonName={t('add')}
+          handleSubmit={addAddress}
+          style={styles.btn}
+        />
       ) : (
         <Button
           buttonName={t('delete')}

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Animated, Image, StyleSheet, Text, TextInput, View } from 'react-native';
-import { SearchIcon } from '../../assets'; // Make sure this path is correct
-import { colors, ms } from '../../utils'; // Make sure this path is correct
-import { t } from 'i18next';
+import React, {useState, useEffect} from 'react';
+import {Animated, Image, StyleSheet, Text, TextInput, View} from 'react-native';
+import {SearchIcon} from '../../assets'; // Make sure this path is correct
+import {colors, ms} from '../../utils'; // Make sure this path is correct
+import {t} from 'i18next';
 
 interface SearchBarProps {
   placeholder: string;
 }
 
-const AnimatedSearchBar: React.FC<SearchBarProps> = ({ placeholder }) => {
+const AnimatedSearchBar: React.FC<SearchBarProps> = ({placeholder}) => {
   const [counter, setCounter] = useState(0);
   const arr = ['tv', 'laptop', 'mobile', 'gaming', 'audio'];
-  
+
   // Create an animated value for the opacity of the placeholder text
   const animatedOpacity = new Animated.Value(1);
   const [currentPlaceholder, setCurrentPlaceholder] = useState(arr[counter]);
@@ -29,7 +29,7 @@ const AnimatedSearchBar: React.FC<SearchBarProps> = ({ placeholder }) => {
       // After the fade-out animation completes, update the placeholder
       setTimeout(() => {
         setCurrentPlaceholder(arr[counter]);
-        
+
         // Fade in the new placeholder (animation to 1 opacity)
         Animated.timing(animatedOpacity, {
           toValue: 1,
@@ -38,9 +38,8 @@ const AnimatedSearchBar: React.FC<SearchBarProps> = ({ placeholder }) => {
         }).start();
 
         // Increment counter and reset after the last item
-        setCounter((prevCounter) => (prevCounter + 1) % arr.length);
+        setCounter(prevCounter => (prevCounter + 1) % arr.length);
       }, 300); // Delay to match the fade-out time
-
     }, 2000);
 
     // Cleanup interval on component unmount
@@ -53,10 +52,10 @@ const AnimatedSearchBar: React.FC<SearchBarProps> = ({ placeholder }) => {
         <Image source={SearchIcon} style={styles.searchImage} />
         {/* Animated view for the placeholder text */}
 
-        <Text style={styles.placeholderText}>{t(placeholder)} {t('for')}</Text>
-        <Animated.View
-          style={ {opacity: animatedOpacity }}
-        >
+        <Text style={styles.placeholderText}>
+          {t(placeholder)} {t('for')}
+        </Text>
+        <Animated.View style={{opacity: animatedOpacity}}>
           <Text style={styles.placeholderText}>
             '{`${t(currentPlaceholder)}`}'
           </Text>
@@ -71,7 +70,7 @@ export default AnimatedSearchBar;
 const styles = StyleSheet.create({
   container: {
     height: ms(40),
-    width: ms(342),
+    width: ms(352),
     backgroundColor: colors.secondaryBgColor,
     alignSelf: 'center',
     borderRadius: 20,
@@ -80,19 +79,19 @@ const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',
     marginHorizontal: ms(10),
-    alignItems:'center',
-    gap:ms(5),
+    alignItems: 'center',
+    gap: ms(5),
   },
   searchImage: {
     height: ms(16),
     width: ms(16),
     alignSelf: 'center',
-    marginRight:ms(5)
+    marginRight: ms(5),
   },
   placeholderContainer: {
-   transform: [{ translateY: 20 }],
-   alignSelf:'center',
-   marginLeft:ms(10),
+    transform: [{translateY: 20}],
+    alignSelf: 'center',
+    marginLeft: ms(10),
   },
   placeholderText: {
     color: colors.textColor,

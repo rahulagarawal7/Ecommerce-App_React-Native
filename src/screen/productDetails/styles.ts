@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
       height: '100%',
       alignSelf: 'center',
       borderRadius: 10,
-      marginVertical: ms(20),
+     marginBottom:ms(20)
     },
     lkeImage: {
       height: ms(25),
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
       height: ms(300),
       width: ms(300),
       alignSelf: 'center',
-  
+      marginTop:ms(20),
       borderRadius: 10,
     },
     text: {
@@ -51,8 +51,16 @@ export const styles = StyleSheet.create({
     cartLogo: {
       height: ms(40),
       width: ms(40),
-      alignSelf: 'flex-end',
-      margin: 10,
+     marginRight:ms(20),
+     marginTop:ms(10)
     },
+    cartBox:{
+      position: 'absolute',
+      alignSelf: 'flex-end',
+    },
+    backBox:{
+      marginBottom:ms(20),
+      marginTop:ms(10)
+    }
   });
   

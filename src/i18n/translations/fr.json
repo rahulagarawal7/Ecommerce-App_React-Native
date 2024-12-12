@@ -125,5 +125,10 @@
   "Please fill all fields!": "Veuillez remplir tous les champs !",
   "Name must be more the 3 character": "Le nom doit contenir plus de 3 caractères",
   "Enter valid phone number": "Entrez un numéro de téléphone valide",
-  "Enter valid password": "Entrez un mot de passe valide"
+  "Enter valid password": "Entrez un mot de passe valide",
+  "no results found": "Aucun résultat trouvé",
+  "search by brand": "Rechercher par marque",
+  "please enter your card details and address.": "Veuillez entrer vos informations de carte et votre adresse.",
+  "please enter your card details.": "Veuillez entrer vos informations de carte.",
+  "please enter your address.": "Veuillez entrer votre adresse."
 }

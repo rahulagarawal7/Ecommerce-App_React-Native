@@ -84,6 +84,7 @@ export interface ProductTypes{
         name: string;
         latitude: number;
         longitude: number;
+        description?:string
       }
       
    export   interface StoreListType {

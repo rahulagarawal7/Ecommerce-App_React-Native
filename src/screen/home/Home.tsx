@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   StatusBar,
+  ActivityIndicator,
 } from 'react-native';
 import {
   AnimatedSearchBar,
@@ -18,7 +19,7 @@ import {
 } from '../../component';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigation/types';
-import {screenNames} from '../../utils/constants';
+import {colors, screenNames} from '../../utils/constants';
 import {useAppSelector} from '../../redux/store/store';
 import {ProductTypes} from '../../utils/types';
 import {firebase} from '@react-native-firebase/auth';
@@ -94,8 +95,20 @@ const Home: React.FC<Props> = ({navigation}) => {
             <ProductCardList productList={products} />
           ) : (
             <View style={styles.emptyBox}>
-              <View style={styles.emptyContainer} />
-              <View style={styles.emptyContainer} />
+              <View style={styles.emptyContainer}>
+                <ActivityIndicator
+                  size="large"
+                  color={colors.tintColor}
+                  style={{position: 'absolute', alignSelf: 'center'}}
+                />
+              </View>
+              <View style={styles.emptyContainer}>
+                <ActivityIndicator
+                  size="large"
+                  color={colors.tintColor}
+                  style={{position: 'absolute', alignSelf: 'center'}}
+                />
+              </View>
             </View>
           )}
         </View>

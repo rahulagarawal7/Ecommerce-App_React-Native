@@ -5,20 +5,23 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../navigation/types';
 import {BackArrowLogo, PaymentCardLogo} from '../../assets';
 import {Screen} from 'react-native-screens';
-import { screenNames } from '../../utils/constants';
-import { t } from 'i18next';
+import {screenNames} from '../../utils/constants';
+import {t} from 'i18next';
 
 interface CheckOutProps {
   data: string;
   title: string;
   screen: string;
-  logo?:boolean;
+  logo?: boolean;
 }
 
-const CheckOut: React.FC<CheckOutProps> = ({data, title, screen ,logo = false}) => {
+const CheckOut: React.FC<CheckOutProps> = ({
+  data,
+  title,
+  screen,
+  logo = false,
+}) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-
-
 
   return (
     <TouchableOpacity
@@ -26,14 +29,14 @@ const CheckOut: React.FC<CheckOutProps> = ({data, title, screen ,logo = false}) 
       onPress={() => navigation.navigate(screen, undefined)}>
       <View style={styles.box}>
         <Text style={styles.text}>{t(title)}</Text>
-        <View style={screen===screenNames.addPayment && styles.cardLogo}>
-        <Text
-          style={styles.editText}
-          // onPress={() => navigation.navigate(screenNames.addAddress, undefined)}
-        >
-          {t(data)}
-        </Text>
-       { logo && <Image source={PaymentCardLogo} />}
+        <View style={screen === screenNames.addPayment && styles.cardLogo}>
+          <Text
+            style={styles.editText}
+            // onPress={() => navigation.navigate(screenNames.addAddress, undefined)}
+          >
+            {t(data)}
+          </Text>
+          {logo && <Image source={PaymentCardLogo} />}
         </View>
       </View>
       <Image source={BackArrowLogo} style={styles.image} />
@@ -57,10 +60,10 @@ const styles = StyleSheet.create({
     color: colors.textColor,
     fontSize: ms(12),
   },
-  cardLogo:{
-    flexDirection:'row',
-    alignItems:"center",
-    gap:ms(10),
+  cardLogo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: ms(10),
   },
   editText: {
     fontSize: ms(16),

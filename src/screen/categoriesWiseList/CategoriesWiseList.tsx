@@ -62,7 +62,10 @@ const CategoriesWiseList: React.FC<CategoryWiseListProps> = ({route}) => {
           <Text style={styles.loaderText}>Loading Products...</Text>
         </View>
       </Modal>
-      <BackButton heading="back" />
+      <View style={styles.backBox}>
+        <BackButton heading="back" />
+      </View>
+
       <Text style={styles.headingText}>
         {t(name)} ({productList.length})
       </Text>

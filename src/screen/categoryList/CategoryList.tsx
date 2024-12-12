@@ -13,7 +13,9 @@ interface CategoryListProps {
 const CategoryList: React.FC<CategoryListProps> = ({route}) => {
   return (
     <View style={styles.container}>
-      <BackButton heading="back" />
+      <View style={styles.backBox}>
+        <BackButton heading="back" />
+      </View>
       <Text style={styles.headingText}>{t(route?.params?.name)}</Text>
       <View style={styles.list}>
         <SeeAllProductList productList={route?.params?.data} />
@@ -38,5 +40,8 @@ const styles = StyleSheet.create({
   },
   list: {
     marginBottom: 90,
+  },
+  backBox: {
+    marginTop: ms(10),
   },
 });
