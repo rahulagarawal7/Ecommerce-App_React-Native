@@ -1,5 +1,6 @@
 import {
   Alert,
+  Linking,
   ScrollView,
   StyleSheet,
   Text,
@@ -31,7 +32,13 @@ const FinalPayment: React.FC<FinalPaymentProps> = ({route}) => {
       Alert.alert(t('error'), t('please enter your address.'));
       return;
     }
+    const upiUrl = `upi://pay?pa=7067076526@ptsbi&pn=PayeeName&mc=0000&tid=12345&tr=txn123&tn=Payment+Note&am=10&cu=INR;`;
+
+    Linking.openURL(upiUrl).catch(err =>
+      console.error('Failed to open UPI app:', err),
+    );
   };
+
   const handlePressPay = () => {
     if (cardNumber === '' && address === '') {
       Alert.alert(t('error'), t('please enter your card details and address.'));
